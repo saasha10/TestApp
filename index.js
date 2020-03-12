@@ -3,9 +3,9 @@
  */
 
 import { AppRegistry } from 'react-native';
-import React from 'react'
+// import React from 'react'
 // import App from './App';
-import SumExampleContainer  from './containers/SumExampleContainer'
+// import SumExampleContainer  from './containers/SumExampleContainer'
 //-----------> *** Try with AppExample *** <--------------
 import AppExample from './AppExample'
 //-----------> *** Try with AppExample *** <--------------
