@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import {getPeopleAwait, getPeopleAxios, getPeopleSuperAgent} from '../store'
-import dataList from '../components/dataList'
+import DataList from '../components/dataList'
 
 //Map the redux state to your props.
 const mapStateToProps = state => ({
@@ -15,4 +15,4 @@ const mapDispatchToProps = {
     // getPeopleSuperAgent
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(dataList)
+export default connect(mapStateToProps, mapDispatchToProps)(DataList)

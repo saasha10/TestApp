@@ -10,7 +10,7 @@ const StyledText = styled(Text)`
 `
 
 
-export default class dataList extends Component {
+export default class DataList extends Component {
     componentDidMount() {
         // this.props.getPeopleAwait()
         this.props.getPeopleAxios()
