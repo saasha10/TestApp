@@ -7,7 +7,7 @@
  */
 
 import React, {useState} from 'react';
-import {View, Text, SafeAreaView, ScrollView, TouchableOpacity} from 'react-native'
+import {SafeAreaView, ScrollView} from 'react-native'
 import styled from 'styled-components'
 import ModalWithHooks from './components/utilities/ModalWithHooks'
 const StyledSafeAreaView = styled(SafeAreaView)`

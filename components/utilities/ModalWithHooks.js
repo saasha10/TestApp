@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from 'react-native'
-import TextInput from '../TextInput'
+import TextInput from '../TextSearch'
 
 export default function() {
     const [modalVisible, setModalVisible] = useState(false)
