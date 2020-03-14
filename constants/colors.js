@@ -1,8 +1,10 @@
-export const black = "#000"
-export const greyStrong1 = "#00000099"
-export const lightGray = "lightgray"
-export const grayAlmostWhite = "#f9fafb"
-export const white = "#fff"
-export const violetOfficalColor = "#b364ff"
-export const red = "#db2828"
-export const green = "#21ba45"
+export const UIColors = {
+    black: "#000",
+    greyStrong1: "#00000099",
+    lightGray: "lightgray",
+    grayAlmostWhite: "#f9fafb",
+    white: "#fff",
+    violetOfficalColor: "#b364ff",
+    red: "#db2828",
+    green: "#21ba45",
+}
