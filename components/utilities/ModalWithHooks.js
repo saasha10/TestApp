@@ -1,48 +1,106 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from 'react-native'
+import { violetOfficalColor, lightGray, grayAlmostWhite, white, red, green, greyStrong1 } from '../../constants/colors'
 import TextInput from '../TextSearch'
-
-export default function() {
+//-----------------------------Styled MODAL HEADER-----------------------------------
+const StyledHeaderTitle = styled.Text`
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    padding: 15px;
+    color: ${violetOfficalColor};
+`
+const StyledDivider = styled.View`
+    width: 100%;
+    height: 1%;
+    background-color: ${lightGray};
+`
+//-----------------------------Styled MODAL BODY-----------------------------------
+const StyledModalBody = styled.View`
+    background-color: ${white};
+    paddingVertical: 20px;
+    paddingHorizontal: 10px;
+`
+const StyledBodyText = styled.Text`
+    text-align: center;
+`
+//-----------------------------Styled MODAL FOOTER-----------------------------------
+const StyledContainerButtons = styled.View`
+    flexDirection: row-reverse; 
+    margin: 10px;
+`
+const StyledFooterButtons = styled.TouchableOpacity`
+    borderRadius: 5px;
+    marginHorizontal: 10px;
+    paddingVertical: 10px;
+    paddingHorizontal: 20px;
+    background-color: ${props => props.isClose ? red : green};
+`
+const StyledButtonText = styled.Text`
+    color: ${white};
+    font-weight: bold;
+`
+//----------------------------- Styled MODAL CONTAINER-----------------------------------
+const StyledModalContainer = styled.View`
+    background-color: ${grayAlmostWhite};
+    borderRadius: 5px;
+`
+//-----------------------------Styled MODAL-----------------------------------
+const StyledModal = styled.View`
+    background-color: ${greyStrong1};
+    flex: 1;
+    align-items: center;
+    justify-content: center; 
+`
+const StyledContainerModal = styled.View`
+    flex: 1;
+    background-color: ${white};
+    align-items: center;
+    justify-content: center;
+`
+//---------------------------------------------------------------------------------------
+export default function () {
     const [modalVisible, setModalVisible] = useState(false)
-
+    //-----------------------------MODAL HEADER-----------------------------------
     const modalHeader = (
-        <View style={styles.modalHeader}>
-            <Text style={styles.title}>Searcher</Text>
-            <View style={styles.divider}></View>
+        <View>
+            <StyledHeaderTitle>Filters</StyledHeaderTitle>
+            <StyledDivider />
         </View>
     )
-
+    //-----------------------------MODAL BODY-----------------------------------
     const modalBody = (
-        <View style={styles.modalBody}>
-            <Text style={styles.bodyText}>Working in progress!</Text>
-        </View>
+        <StyledModalBody>
+            <StyledBodyText>Working in progress!</StyledBodyText>
+        </StyledModalBody>
     )
-
+    //-----------------------------MODAL FOOTER-----------------------------------
     const modalFooter = (
-        <View style={styles.modalFooter}>
-            <View style={styles.divider}></View>
-            <View style={{ flexDirection: "row-reverse", margin: 10 }}>
-                <TouchableOpacity style={{ ...styles.actions, backgroundColor: "#db2828" }}
+        <View>
+            <StyledDivider />
+            <StyledContainerButtons>
+                <StyledFooterButtons isClose={true}
                     onPress={() => {
                         setModalVisible(!modalVisible);
                     }}>
-                    <Text style={styles.actionText}>Close</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{ ...styles.actions, backgroundColor: "#21ba45" }}>
-                    <Text style={styles.actionText}>Accept</Text>
-                </TouchableOpacity>
-            </View>
+                    <StyledButtonText>Close</StyledButtonText>
+                </StyledFooterButtons>
+                <StyledFooterButtons isClose={false}>
+                    <StyledButtonText>Accept</StyledButtonText>
+                </StyledFooterButtons>
+            </StyledContainerButtons>
         </View>
     )
-
+    //-----------------------------MODAL CONTAINER-----------------------------------
     const modalContainer = (
-        <View style={styles.modalContainer}>
+        <StyledModalContainer>
             {modalHeader}
             {modalBody}
             {modalFooter}
-        </View>
+        </StyledModalContainer>
     )
-
+    //-----------------------------MODAL-----------------------------------
     const modal = (
         <Modal
             transparent={false}
@@ -51,19 +109,19 @@ export default function() {
             onRequestClose={() => {
                 Alert.alert('Modal has been closed.');
             }}>
-            <View style={styles.modal}>
+            <StyledModal>
                 <View>
                     {modalContainer}
                 </View>
-            </View>
+            </StyledModal>
         </Modal>
     )
-
+    //----------------------------------------------------------------
     return (
-        <View style={styles.container}>
+        <StyledContainerModal>
             {modal}
-                <TextInput openModal={() => setModalVisible(true)}/>
-        </View>
+            <TextInput openModal={() => setModalVisible(true)} />
+        </StyledContainerModal>
     );
 
 }
@@ -85,9 +143,6 @@ const styles = StyleSheet.create({
         backgroundColor: "#f9fafb",
         borderRadius: 5
     },
-    modalHeader: {
-
-    },
     title: {
         fontWeight: "bold",
         fontSize: 40,
@@ -104,7 +159,7 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         paddingHorizontal: 10
     },
-    bodyText:{
+    bodyText: {
         textAlign: "center",
     },
     modalFooter: {
