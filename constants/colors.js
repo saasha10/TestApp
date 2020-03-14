@@ -1,0 +1,8 @@
+export const black = "#000"
+export const greyStrong1 = "#00000099"
+export const lightGray = "lightgray"
+export const grayAlmostWhite = "#f9fafb"
+export const white = "#fff"
+export const violetOfficalColor = "#b364ff"
+export const red = "#db2828"
+export const green = "#21ba45"
