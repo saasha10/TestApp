@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { View, Text } from 'react-native';
 import styled from 'styled-components'
 
-const StyledText = styled(Text)`
+const StyledText = styled.Text`
     font-size: 20px;
     text-align: center;
     margin: 10px;

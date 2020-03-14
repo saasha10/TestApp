@@ -1,5 +1,4 @@
 export const COUNTER_CHANGE = 'COUNTER_CHANGE'
-
 //Initiate the api call
 export const GET_PEOPLE = 'GET_PEOPLE'
 //Gets the players on api call is fullfilled

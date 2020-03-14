@@ -3,9 +3,9 @@ import React from 'react'
 import { View, Button, Text } from 'react-native'
 import styled from 'styled-components'
 
-const StyledViewContainer = styled(View)``
+const StyledViewContainer = styled.View``
 
-const StyledText = styled(Text)`
+const StyledText = styled.Text`
     font-size: 20px;
     text-align: center;
 `

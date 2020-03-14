@@ -10,14 +10,14 @@ import React, {useState} from 'react';
 import {SafeAreaView, ScrollView} from 'react-native'
 import styled from 'styled-components'
 import ModalWithHooks from './components/utilities/ModalWithHooks'
-const StyledSafeAreaView = styled(SafeAreaView)`
+const StyledSafeAreaView = styled.SafeAreaView`
   flex: 1;
   margin: 1px;
 `
 
-const StyledScrollView = styled(ScrollView)`
+const StyledScrollView = styled.ScrollView`
   background-color: 'rgba(179, 100, 255, 0.15)'; 
-  marginHorizontal: 1;
+  marginHorizontal: 1px;
 `
 
 const App = () => {
