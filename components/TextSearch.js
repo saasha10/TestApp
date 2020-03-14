@@ -1,16 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
+import { greyStrong1, lightGray } from '../constants/colors'
 
 const StyledText = styled.Text`
-    margin: 10px;
+    flex: 1;
+    margin: 5px;
     padding: 10px;
     height: 60px;
     font-size: 24px;
     text-align: center;
-    color: #bdbcbc;
+    color: ${greyStrong1};
     border-bottom-width: 1px;
-    borderColor: black;
+    borderColor: ${lightGray};
     borderStyle: solid;
 `
 
