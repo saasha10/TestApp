@@ -7,22 +7,28 @@
  */
 
 import React from 'react'
+import {Dimensions} from 'react-native'
 import styled from 'styled-components'
-import { grayAlmostWhite } from './constants/colors'
+import { UIColors } from './constants/colors'
 import ModalWithHooks from './components/utilities/ModalWithHooks'
 
+//---------------------------------------------------------------------------------------
+// Dimensions to know exactly the width and height of devices 
+// const screenWidth = Math.round(Dimensions.get('window').width)
+// const screenHeight = Math.round(Dimensions.get('window').height)
+
 const StyledSafeAreaView = styled.SafeAreaView`
-  flex: 1;
   margin: 1px;
 `
 
 const StyledScrollView = styled.ScrollView`
-  background-color: ${grayAlmostWhite}; 
+  background-color: ${UIColors.grayAlmostWhite} ; 
   marginHorizontal: 1px;
 `
 
 const App = () => {
-
+  // console.log("screenWidth", screenWidth)
+  // console.log("screenHeight", screenHeight)
   return (
     <StyledSafeAreaView>
       <StyledScrollView>

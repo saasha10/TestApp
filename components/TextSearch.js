@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { View } from 'react-native'
-import { greyStrong1, lightGray } from '../constants/colors'
+import { UIColors } from '../constants/colors'
 
 const StyledText = styled.Text`
     flex: 1;
@@ -10,9 +10,9 @@ const StyledText = styled.Text`
     height: 60px;
     font-size: 24px;
     text-align: center;
-    color: ${greyStrong1};
+    color: ${UIColors.greyStrong1};
     border-bottom-width: 1px;
-    borderColor: ${lightGray};
+    borderColor: ${UIColors.lightGray};
     borderStyle: solid;
 `
 

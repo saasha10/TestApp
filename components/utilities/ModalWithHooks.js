@@ -1,24 +1,26 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { View, Modal } from 'react-native'
-import { violetOfficalColor, lightGray, grayAlmostWhite, white, red, green, greyStrong1 } from '../../constants/colors'
+import { UIColors } from '../../constants/colors'
 import TextInput from '../TextSearch'
 //-----------------------------Styled MODAL HEADER-----------------------------------
 const StyledHeaderTitle = styled.Text`
     font-weight: bold;
-    font-size: 30px;
+    font-size: 25px;
     text-align: center;
-    padding: 15px;
-    color: ${violetOfficalColor};
+    margin: 5px;
+    padding: 10px;
+    color: ${UIColors.violetOfficalColor};
 `
 const StyledDivider = styled.View`
     width: 100%;
     height: 1%;
-    background-color: ${lightGray};
+    background-color: ${UIColors.lightGray};
 `
 //-----------------------------Styled MODAL BODY-----------------------------------
 const StyledModalBody = styled.View`
-    background-color: ${white};
+    flex: 4;
+    background-color: ${UIColors.white};
     paddingVertical: 20px;
     paddingHorizontal: 10px;
 `
@@ -35,29 +37,25 @@ const StyledFooterButtons = styled.TouchableOpacity`
     marginHorizontal: 10px;
     paddingVertical: 10px;
     paddingHorizontal: 20px;
-    background-color: ${props => props.isClose ? red : green};
+    background-color: ${props => props.isClose ? UIColors.red : UIColors.green};
 `
 const StyledButtonText = styled.Text`
-    color: ${white};
+    color: ${UIColors.white};
     font-weight: bold;
 `
 //----------------------------- Styled MODAL CONTAINER-----------------------------------
 const StyledModalContainer = styled.View`
-    background-color: ${grayAlmostWhite};
+    flex: 6;
+    background-color: ${UIColors.grayAlmostWhite};
     borderRadius: 5px;
 `
 //-----------------------------Styled MODAL-----------------------------------
 const StyledModal = styled.View`
-    background-color: ${greyStrong1};
-    flex: 1;
+    background-color: ${UIColors.greyStrong1};
     align-items: center;
-    justify-content: center; 
 `
 const StyledContainerModal = styled.View`
-    flex: 1;
-    background-color: ${white};
-    align-items: center;
-    justify-content: center;
+    background-color: ${UIColors.white};
 `
 //---------------------------------------------------------------------------------------
 export default function () {
@@ -104,7 +102,7 @@ export default function () {
     const modal = (
         <Modal
             transparent={true}
-            animationType='fade'
+            animationType='slide'
             visible={modalVisible}
             onRequestClose={() => {
                 Alert.alert('Modal has been closed.');
