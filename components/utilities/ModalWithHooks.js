@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { View, Text, TouchableOpacity, Modal, StyleSheet } from 'react-native'
+import { View, Modal } from 'react-native'
 import { violetOfficalColor, lightGray, grayAlmostWhite, white, red, green, greyStrong1 } from '../../constants/colors'
 import TextInput from '../TextSearch'
 //-----------------------------Styled MODAL HEADER-----------------------------------
@@ -103,8 +103,8 @@ export default function () {
     //-----------------------------MODAL-----------------------------------
     const modal = (
         <Modal
-            transparent={false}
-            animationType={"fade"}
+            transparent={true}
+            animationType='fade'
             visible={modalVisible}
             onRequestClose={() => {
                 Alert.alert('Modal has been closed.');
@@ -118,10 +118,12 @@ export default function () {
     )
     //----------------------------------------------------------------
     return (
-        <StyledContainerModal>
-            {modal}
+        <>
             <TextInput openModal={() => setModalVisible(true)} />
-        </StyledContainerModal>
+            <StyledContainerModal>
+                {modal}
+            </StyledContainerModal>
+        </>
     );
 
 }
