@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { View, Modal } from 'react-native'
+import { View, Dimensions } from 'react-native'
+import Modal from 'react-native-modal'
 import { UIColors } from '../../constants/colors'
 import TextInput from '../TextSearch'
+const screenWidth = Math.round(Dimensions.get('window').width)
+const screenHeight = Math.round(Dimensions.get('window').height)
 //-----------------------------Styled MODAL HEADER-----------------------------------
 const StyledHeaderTitle = styled.Text`
+    font-family: Cochin;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 30px;
     text-align: center;
     margin: 5px;
     padding: 10px;
@@ -29,14 +33,16 @@ const StyledBodyText = styled.Text`
 `
 //-----------------------------Styled MODAL FOOTER-----------------------------------
 const StyledContainerButtons = styled.View`
-    flexDirection: row-reverse; 
+    flexDirection: row;
+    justify-content: space-between;
     margin: 10px;
 `
 const StyledFooterButtons = styled.TouchableOpacity`
     borderRadius: 5px;
-    marginHorizontal: 10px;
-    paddingVertical: 10px;
-    paddingHorizontal: 20px;
+    margin: 10px;
+    marginHorizontal: 10px; 
+    paddingVertical: 5px;
+    paddingHorizontal: 10px;
     background-color: ${props => props.isClose ? UIColors.red : UIColors.green};
 `
 const StyledButtonText = styled.Text`
@@ -45,16 +51,21 @@ const StyledButtonText = styled.Text`
 `
 //----------------------------- Styled MODAL CONTAINER-----------------------------------
 const StyledModalContainer = styled.View`
-    flex: 6;
+    width:${screenWidth}px;
+    height:${screenHeight}px;
     background-color: ${UIColors.grayAlmostWhite};
     borderRadius: 5px;
+    padding: 10px;
 `
 //-----------------------------Styled MODAL-----------------------------------
 const StyledModal = styled.View`
     background-color: ${UIColors.greyStrong1};
-    align-items: center;
+    max-width:${screenWidth}px;
+    height:${screenHeight}px;
+    justifyContent: space-around;
+    color: #00000047;
 `
-const StyledContainerModal = styled.View`
+const StyledParentModal = styled.View`
     background-color: ${UIColors.white};
 `
 //---------------------------------------------------------------------------------------
@@ -70,7 +81,7 @@ export default function () {
     //-----------------------------MODAL BODY-----------------------------------
     const modalBody = (
         <StyledModalBody>
-            <StyledBodyText>Working in progress!</StyledBodyText>
+            <StyledBodyText>Work in progress!</StyledBodyText>
         </StyledModalBody>
     )
     //-----------------------------MODAL FOOTER-----------------------------------
@@ -78,14 +89,14 @@ export default function () {
         <View>
             <StyledDivider />
             <StyledContainerButtons>
+                <StyledFooterButtons isClose={false}>
+                    <StyledButtonText>Accept</StyledButtonText>
+                </StyledFooterButtons>
                 <StyledFooterButtons isClose={true}
                     onPress={() => {
                         setModalVisible(!modalVisible);
                     }}>
                     <StyledButtonText>Close</StyledButtonText>
-                </StyledFooterButtons>
-                <StyledFooterButtons isClose={false}>
-                    <StyledButtonText>Accept</StyledButtonText>
                 </StyledFooterButtons>
             </StyledContainerButtons>
         </View>
@@ -101,9 +112,16 @@ export default function () {
     //-----------------------------MODAL-----------------------------------
     const modal = (
         <Modal
-            transparent={true}
-            animationType='slide'
-            visible={modalVisible}
+            transparent={false}
+            animationIn={!modalVisible ? 'slideInUp' : 'slideInDown'}
+            backdropColor={'#00000047'}
+            backdropOpacity={0.25}
+            animationInTiming={10000}
+            backdropTransitionInTiming={2000}
+            animationOutTiming={1000}
+            backdropTransitionOutTiming={10000}
+            style={{ margin: 0 }}
+            isVisible={modalVisible}
             onRequestClose={() => {
                 Alert.alert('Modal has been closed.');
             }}>
@@ -118,9 +136,9 @@ export default function () {
     return (
         <>
             <TextInput openModal={() => setModalVisible(true)} />
-            <StyledContainerModal>
+            <StyledParentModal>
                 {modal}
-            </StyledContainerModal>
+            </StyledParentModal>
         </>
     );
 
