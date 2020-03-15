@@ -7,11 +7,9 @@
  */
 
 import React from 'react'
-import {Dimensions} from 'react-native'
 import styled from 'styled-components'
 import { UIColors } from './constants/colors'
 import ModalWithHooks from './components/utilities/ModalWithHooks'
-
 //---------------------------------------------------------------------------------------
 // Dimensions to know exactly the width and height of devices 
 // const screenWidth = Math.round(Dimensions.get('window').width)
@@ -27,8 +25,6 @@ const StyledScrollView = styled.ScrollView`
 `
 
 const App = () => {
-  // console.log("screenWidth", screenWidth)
-  // console.log("screenHeight", screenHeight)
   return (
     <StyledSafeAreaView>
       <StyledScrollView>
