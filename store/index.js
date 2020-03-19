@@ -5,7 +5,7 @@ import superagent from 'superagent'
 //import XMLParser from 'react-xml-parser'
 import dataReducer from '../reducers/dataReducer'
 import { fetchData, fetchDataFulfilled, fetchDataRejected } from '../actions/data'
-import { URL_HOME_BUSSINES, URL_STAR_WARS } from '../constants'
+import { URL_HOME_BUSSINES, URL_STAR_WARS, URL_HOME_BUSSINES_JSON } from '../constants'
 
 //Define your action creators that will be responsible for asynchronouse operatiosn 
 export const getPeopleAwait = () => {
@@ -36,14 +36,14 @@ export const getPeopleAxios = () => {
         //Dispatch the fetchData action creator before retrieving to set our loading state to true.
         dispatch(fetchData(true));
         //Then get the data.
-        axios.get(URL_STAR_WARS).then(res => {
-            console.log('people-----------', res)
+        axios.get(URL_HOME_BUSSINES_JSON).then(res => {
+            console.log('data----------->', res)
             //Set the results to the people array.
             // let dataParsed = new XMLParser().parseFromString(res.data)
             // console.log("DATA -----> ", dataParsed)
             // const properties = dataParsed.getElementsByTagName('listaPropiedades')
             // console.log("properties", properties)
-            dispatch(fetchDataFulfilled(res.data.results))
+            dispatch(fetchDataFulfilled(res.data))
             //Error handle the promise and set your errorMessage
         }).catch(err => dispatch(fetchDataRejected(err)))
     }
