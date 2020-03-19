@@ -4,10 +4,10 @@
 
 import { AppRegistry } from 'react-native';
 // import React from 'react'
-import App from './App';
+// import App from './App';
 // import SumExampleContainer  from './containers/SumExampleContainer'
 //-----------> *** Try with AppExample *** <--------------
-// import AppExample from './AppExample'
+import AppExample from './AppExample'
 // import modalWithHooks from './components/utilities/ModalWithHooks'
 //-----------> *** Try with AppExample *** <--------------
 // import RootModalContainer from './containers/RootModalContainer'
@@ -29,4 +29,4 @@ import { name as appName } from './app.json';
 //-----------------------------------------------------------------------------------------
 
 
-AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent(appName, () => AppExample);
