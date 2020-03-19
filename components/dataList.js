@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
 //import your UI from react-native
-import { View, Text } from 'react-native';
+import { ScrollView } from 'react-native';
 import styled from 'styled-components'
+import Card from './utilities/CardProperty'
+
+const StyledViewContainer = styled.View`
+    flex: 1;
+    justify-content: space-around;
+`
 
 const StyledText = styled.Text`
     font-size: 20px;
@@ -22,11 +28,13 @@ export default class DataList extends Component {
         console.log("COMPONENT ---> DATALIST")
         console.log(this.props)
         return (
-            <View>
-                {!loading ? people.length ? people.map((person, i) => <StyledText key={i}>{person.name}</StyledText>) : <StyledText>No People</StyledText>
-                    :
-                    <StyledText>Loading...........</StyledText>}
-            </View>
+            <ScrollView>
+                <StyledViewContainer>
+                    {!loading ? people.customerProperties.length && people.customerProperties.map((property, i) => <Card key={i} properties={property}/>)
+                        :
+                        <StyledText>Loading...........</StyledText>}
+                </StyledViewContainer>
+            </ScrollView>
         )
     }
 }
