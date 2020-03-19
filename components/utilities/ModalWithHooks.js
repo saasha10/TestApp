@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { View, Dimensions } from 'react-native'
+import { View, Dimensions, Picker } from 'react-native'
+import { Text, Input } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Modal from 'react-native-modal'
 import { UIColors } from '../../constants/colors'
 import TextInput from '../TextSearch'
+//----------------------------- Dimesions -----------------------------------
 const screenWidth = Math.round(Dimensions.get('window').width)
 const screenHeight = Math.round(Dimensions.get('window').height)
 //-----------------------------Styled MODAL HEADER-----------------------------------
@@ -28,21 +31,33 @@ const StyledModalBody = styled.View`
     paddingVertical: 20px;
     paddingHorizontal: 10px;
 `
-const StyledBodyText = styled.Text`
+const StyledBodyView = styled.View`
+    flex: 1;
+`
+const StyledBodyView2 = styled.View`
+    flex: 2;
+`
+const StyledParentText = styled.View`
+    flex-direction: row;
+    justify-content: center;
+`
+const StyledBodyText = styled(Text)`
     text-align: center;
+    marginVertical: 10px;
+    marginHorizontal: 50px; 
+    font-size: 20px;
 `
 //-----------------------------Styled MODAL FOOTER-----------------------------------
 const StyledContainerButtons = styled.View`
     flexDirection: row;
     justify-content: space-between;
-    margin: 10px;
+    margin: 5px;
 `
 const StyledFooterButtons = styled.TouchableOpacity`
     borderRadius: 5px;
-    margin: 10px;
-    marginHorizontal: 10px; 
-    paddingVertical: 5px;
-    paddingHorizontal: 10px;
+    margin: 10px; 
+    paddingVertical: 10px;
+    paddingHorizontal: 20px;
     background-color: ${props => props.isClose ? UIColors.red : UIColors.green};
 `
 const StyledButtonText = styled.Text`
@@ -71,6 +86,7 @@ const StyledParentModal = styled.View`
 //---------------------------------------------------------------------------------------
 export default function () {
     const [modalVisible, setModalVisible] = useState(false)
+    const [language, setLanguage] = useState('css')
     //-----------------------------MODAL HEADER-----------------------------------
     const modalHeader = (
         <View>
@@ -81,7 +97,54 @@ export default function () {
     //-----------------------------MODAL BODY-----------------------------------
     const modalBody = (
         <StyledModalBody>
-            <StyledBodyText>Work in progress!</StyledBodyText>
+            <StyledBodyView>
+                <Input
+                    placeholder='Property reference...'
+                    leftIcon={
+                        <Icon
+                            name='home'
+                            size={24}
+                            color='black'
+                        />
+                    }
+                />
+            </StyledBodyView>
+            <StyledBodyView>
+                <Picker
+                    itemStyle={{color: "red"}}
+                    itemTextStyle={{textAlign: "center", fontSize: 20}}
+                    selectedValue={language}
+                    onValueChange={itemValue => setLanguage(itemValue)}>
+                    <Picker.Item label="Piso" value="piso" />
+                    <Picker.Item label="JavaScript" value="js" />
+                </Picker>
+            </StyledBodyView>
+            <StyledBodyView>
+                <Picker
+                    selectedValue={language}
+                    onValueChange={itemValue => setLanguage(itemValue)}>
+                    <Picker.Item label="Oferta" value="oferta" />
+                    <Picker.Item label="JavaScript" value="js" />
+                </Picker>
+            </StyledBodyView>
+            <StyledBodyView>
+                <Picker
+                    selectedValue={language}
+                    onValueChange={itemValue => setLanguage(itemValue)}>
+                    <Picker.Item label="Localidad" value="localidad" />
+                    <Picker.Item label="JavaScript" value="js" />
+                </Picker>
+            </StyledBodyView>
+            <StyledBodyView2>
+                <StyledParentText>
+                    <StyledBodyText>Room min.</StyledBodyText>
+                    <StyledBodyText>Room max.</StyledBodyText>
+                </StyledParentText>
+                <StyledParentText>
+                    <StyledBodyText>Price min.</StyledBodyText>
+                    <StyledBodyText>Price max.</StyledBodyText>
+                </StyledParentText>
+            </StyledBodyView2>
         </StyledModalBody>
     )
     //-----------------------------MODAL FOOTER-----------------------------------
@@ -116,10 +179,10 @@ export default function () {
             animationIn={!modalVisible ? 'slideInUp' : 'slideInDown'}
             backdropColor={'#00000047'}
             backdropOpacity={0.25}
-            animationInTiming={10000}
+            animationInTiming={2000}
             backdropTransitionInTiming={2000}
             animationOutTiming={1000}
-            backdropTransitionOutTiming={10000}
+            backdropTransitionOutTiming={2000}
             style={{ margin: 0 }}
             isVisible={modalVisible}
             onRequestClose={() => {
