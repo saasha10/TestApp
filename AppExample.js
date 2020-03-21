@@ -1,8 +1,8 @@
 import React from 'react';
-// import {Platform} from 'react-native'
+//import {Platform} from 'react-native'
 //import the list component that will fetch the data.
+//import App from './App'
 import DataContainer from './containers/DataContainer'
-// import TextInput from './components/TextSearch'
 //import provider to connect component to redux store.
 import { Provider} from 'react-redux';
 //import your store to connect your component.
