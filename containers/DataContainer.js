@@ -4,15 +4,15 @@ import DataList from '../components/dataList'
 
 //Map the redux state to your props.
 const mapStateToProps = state => ({
-    people: state.people,
+    data: state.data,
     loading: state.loading,
   })
 
 //Map your action creators to your props.
 const mapDispatchToProps = {
     // getPeopleAwait,
-    getPeopleAxios
     // getPeopleSuperAgent
+    getPeopleAxios
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataList)

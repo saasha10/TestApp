@@ -18,7 +18,7 @@ export default class DataList extends Component {
     }
 
     render() {
-        const { people, loading } = this.props
+        const { data, loading } = this.props
         console.log("COMPONENT ---> DATALIST")
         console.log(this.props)
         return (
@@ -35,8 +35,8 @@ export default class DataList extends Component {
                             <MyLoaderListCard />
                         </>
                         :
-                        people.customerProperties.length &&
-                        people.customerProperties.map((property, i) => <Card key={i} properties={property} />)}
+                        data.customerProperties.length &&
+                        data.customerProperties.map((property, i) => <Card key={i} properties={property} />)}
                 </StyledViewContainer>
             </ScrollView>
         )
