@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 //import your UI from react-native
 import { ScrollView } from 'react-native';
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import Card from './utilities/CardProperty'
 
 const StyledViewContainer = styled.View`
@@ -30,7 +30,9 @@ export default class DataList extends Component {
         return (
             <ScrollView>
                 <StyledViewContainer>
-                    {!loading ? people.customerProperties.length && people.customerProperties.map((property, i) => <Card key={i} properties={property}/>)
+                    {!loading ? 
+                    people.customerProperties.length && 
+                    people.customerProperties.map((property, i) => <Card key={i} properties={property}/>)
                         :
                         <StyledText>Loading...........</StyledText>}
                 </StyledViewContainer>
