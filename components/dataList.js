@@ -3,24 +3,18 @@ import React, { Component } from 'react'
 import { ScrollView } from 'react-native';
 import styled from 'styled-components/native'
 import Card from './utilities/CardProperty'
+import MyLoaderListCard from './utilities/Loader';
 
 const StyledViewContainer = styled.View`
     flex: 1;
     justify-content: space-around;
 `
 
-const StyledText = styled.Text`
-    font-size: 20px;
-    text-align: center;
-    margin: 10px;
-`
-
-
 export default class DataList extends Component {
     componentDidMount() {
         // this.props.getPeopleAwait()
-        this.props.getPeopleAxios()
         // this.props.getPeopleSuperAgent()
+        this.props.getPeopleAxios()
     }
 
     render() {
@@ -30,11 +24,19 @@ export default class DataList extends Component {
         return (
             <ScrollView>
                 <StyledViewContainer>
-                    {!loading ? 
-                    people.customerProperties.length && 
-                    people.customerProperties.map((property, i) => <Card key={i} properties={property}/>)
+                    {loading ?
+                        <>
+                            <MyLoaderListCard />
+                            <MyLoaderListCard />
+                            <MyLoaderListCard />
+                            <MyLoaderListCard />
+                            <MyLoaderListCard />
+                            <MyLoaderListCard />
+                            <MyLoaderListCard />
+                        </>
                         :
-                        <StyledText>Loading...........</StyledText>}
+                        people.customerProperties.length &&
+                        people.customerProperties.map((property, i) => <Card key={i} properties={property} />)}
                 </StyledViewContainer>
             </ScrollView>
         )
