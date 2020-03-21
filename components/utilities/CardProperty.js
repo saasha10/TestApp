@@ -45,8 +45,6 @@ const StyledButtonShow = styled.Button`
     box-shadow: 5px 10px ${UIColors.grayAlmostWhite};
 `
 
-// const priceProperty = new Intl.NumberFormat("de-DE").format(parseInt(properties.propertyOperation.operationPrice)) 
-// console.log(priceProperty)
 export default ({ properties }) => (
     <Card>
         <StyledImage source={{ uri: properties.propertyImages[0].imageUrl }} />
