@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 //import your store to connect your component.
 import store from './store'
 import { UIColors } from './constants/colors'
-import ModalWithHooks from './components/utilities/ModalWithHooks'
+import ModalWithHooksContainer from './containers/ModalWithHooksContainer'
 import DataContainer from './containers/DataContainer'
 
 const StyledSafeAreaView = styled.SafeAreaView`
@@ -23,7 +23,7 @@ const App = () => {
     <ThemeProvider>
       <StyledSafeAreaView>
         <StyledScrollView>
-          <ModalWithHooks />
+          <ModalWithHooksContainer />
           <DataContainer />
         </StyledScrollView>
       </StyledSafeAreaView>
