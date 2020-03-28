@@ -127,7 +127,7 @@ export default function ({ filters }) {
                 itemTextStyle={{ textAlign: "center", fontSize: 20 }}
                 selectedValue={language}
                 onValueChange={itemValue => setLanguage(itemValue)}>
-                <Picker.Item label="Select your type..." value="" />
+                <Picker.Item label="Select your type" value="" />
                 {filters.homeType.length && this.createPickerItem(filters.homeType)}
             </StyledPicker>
 
@@ -141,6 +141,7 @@ export default function ({ filters }) {
             <StyledPicker
                 selectedValue={city}
                 onValueChange={itemValue => setCity(itemValue)}>
+                <Picker.Item label="Select yout city" value="" />
                 {filters.city.length && this.createPickerItem(filters.city)}
             </StyledPicker>
 
