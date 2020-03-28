@@ -2,10 +2,11 @@ import {connect} from 'react-redux'
 import {getPeopleAwait, getPeopleAxios, getPeopleSuperAgent} from '../store'
 import DataList from '../components/dataList'
 
+
 //Map the redux state to your props.
 const mapStateToProps = state => ({
-    data: state.data,
-    loading: state.loading,
+    data: state.dataReducer.data,
+    loading: state.dataReducer.loading
   })
 
 //Map your action creators to your props.
