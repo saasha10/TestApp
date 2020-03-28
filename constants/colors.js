@@ -1,6 +1,7 @@
 export const UIColors = {
     black: "#000",
-    greyStrong1: "#00000099",
+    greyStrong1: "#505050",
+    greyStrong2: "#00000099",
     lightGray: "lightgray",
     grayAlmostWhite: "#f9fafb",
     white: "#fff",
