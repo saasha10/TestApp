@@ -9,3 +9,6 @@ export const GET_DATA_REJECTED = 'GET_DATA_REJECTED'
 export const URL_HOME_BUSSINES_JSON = 'http://www.inmomallorcabusiness.com/panel/scripts/urlJSON.php'
 export const URL_HOME_BUSSINES = 'http://www.mallorcabusinesslife.com/panel/scripts/urlXCP.php'
 export const URL_STAR_WARS = 'https://swapi.co/api/people'
+//FILTERS
+export const GET_FILTERS = 'GET_FILTERS'
+export const SET_FILTERS = 'SET_FILTERS'
