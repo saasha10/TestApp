@@ -86,10 +86,17 @@ const StyledModal = styled.View`
 const StyledParentModal = styled.View`
     background-color: ${UIColors.white};
 `
-//---------------------------------------------------------------------------------------
-export default function () {
+//---------------------------------------- Picker Item creator to use with filters options -----------------------------------------------
+createPickerItem = filtersType => filtersType.map((element, key) => <Picker.Item label={element} value={key} key={key} />)
+//---------------------------------------- MAIN -----------------------------------------------
+export default function ({ filters }) {
+    console.log("MODAL WITH HOOKS PROPS")
+    console.log({ filters })
+
     const [modalVisible, setModalVisible] = useState(false)
     const [language, setLanguage] = useState('css')
+    const [offer, setOffer] = useState('css')
+    const [city, setCity] = useState('css')
 
     //-----------------------------MODAL HEADER-----------------------------------
     const modalHeader = (
@@ -105,7 +112,7 @@ export default function () {
                 placeholder='Property reference...'
                 errorStyle={{ color: 'red' }}
                 errorMessage=''
-                containerStyle={{marginBottom: 40}}
+                containerStyle={{ marginBottom: 40 }}
                 leftIcon={
                     <Icon
                         name='home'
@@ -120,22 +127,21 @@ export default function () {
                 itemTextStyle={{ textAlign: "center", fontSize: 20 }}
                 selectedValue={language}
                 onValueChange={itemValue => setLanguage(itemValue)}>
-                <Picker.Item label="Piso" value="piso" />
-                <Picker.Item label="JavaScript" value="js" />
+                <Picker.Item label="Select your type..." value="" />
+                {filters.homeType.length && this.createPickerItem(filters.homeType)}
             </StyledPicker>
 
             <StyledPicker
-                selectedValue={language}
-                onValueChange={itemValue => setLanguage(itemValue)}>
-                <Picker.Item label="Oferta" value="oferta" />
-                <Picker.Item label="JavaScript" value="js" />
+                selectedValue={offer}
+                onValueChange={itemValue => setOffer(itemValue)}>
+                <Picker.Item label="Select yout offer" value="" />
+                {filters.operationType.length && this.createPickerItem(filters.operationType)}
             </StyledPicker>
 
             <StyledPicker
-                selectedValue={language}
-                onValueChange={itemValue => setLanguage(itemValue)}>
-                <Picker.Item label="Localidad" value="localidad" />
-                <Picker.Item label="JavaScript" value="js" />
+                selectedValue={city}
+                onValueChange={itemValue => setCity(itemValue)}>
+                {filters.city.length && this.createPickerItem(filters.city)}
             </StyledPicker>
 
             <StyledBodyView2>
@@ -179,13 +185,13 @@ export default function () {
     const modal = (
         <Modal
             transparent={false}
-            animationIn={!modalVisible ? 'slideInUp' : 'slideInDown'}
+            animationIn='slideInDown'
             backdropColor={'#00000047'}
             backdropOpacity={0.25}
-            animationInTiming={2000}
-            backdropTransitionInTiming={2000}
+            animationInTiming={1000}
+            backdropTransitionInTiming={1000}
             animationOutTiming={1000}
-            backdropTransitionOutTiming={2000}
+            backdropTransitionOutTiming={1000}
             style={{ margin: 0 }}
             isVisible={modalVisible}
             onRequestClose={() => {
