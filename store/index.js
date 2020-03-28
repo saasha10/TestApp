@@ -43,12 +43,13 @@ export const getPeopleAxios = () => {
         //Then get the data.
         axios.get(URL_HOME_BUSSINES_JSON).then(res => {
             //console.log('data----------->', res)
-            //res.data.customerProperties.propertyFeatures.featuresType
+            //-----------------------------FILTERS CREATION-----------------------------------
             let main = new Main()
-            const typeHome = main.newArrayDifferentValues(res.data.customerProperties, 'propertyFeatures', 'featuresType')
-
-            // console.log("typeHome", typeHome)
-            dispatch(getFilters({typeHome}))
+            const homeType = main.newArrayDifferentValues(res.data.customerProperties, 'propertyFeatures', 'featuresType')
+            const operationType = main.newArrayDifferentValues(res.data.customerProperties, 'propertyOperation', 'operationType')
+            const city = main.newArrayDifferentValues(res.data.customerProperties, 'propertyAddress', 'addressTown')
+            dispatch(getFilters({ homeType, operationType, city }))
+            //-----------------------------FILTERS CREATION-----------------------------------
             dispatch(fetchDataFulfilled(res.data))
             //Error handle the promise and set your errorMessage
         }).catch(err => dispatch(fetchDataRejected(err)))
