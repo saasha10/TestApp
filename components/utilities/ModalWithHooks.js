@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { View, Dimensions, Picker } from 'react-native'
+import { Alert, View, Dimensions, Picker } from 'react-native'
 import { Text, Input } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Modal from 'react-native-modal'
@@ -77,7 +77,7 @@ const StyledModalContainer = styled.View`
 `
 //-----------------------------Styled MODAL-----------------------------------
 const StyledModal = styled.View`
-    background-color: ${UIColors.greyStrong1};
+    background-color: ${UIColors.greyStrong2};
     max-width:${screenWidth}px;
     height:${screenHeight}px;
     justifyContent: space-around;
@@ -90,14 +90,12 @@ const StyledParentModal = styled.View`
 createPickerItem = filtersType => filtersType.map((element, key) => <Picker.Item label={element} value={key} key={key} />)
 //---------------------------------------- MAIN -----------------------------------------------
 export default function ({ filters }) {
-    console.log("MODAL WITH HOOKS PROPS")
-    console.log({ filters })
-
+    // console.log("MODAL WITH HOOKS PROPS")
+    // console.log({ filters })
     const [modalVisible, setModalVisible] = useState(false)
-    const [language, setLanguage] = useState('css')
+    const [homeType, setHomeType] = useState('css')
     const [offer, setOffer] = useState('css')
     const [city, setCity] = useState('css')
-
     //-----------------------------MODAL HEADER-----------------------------------
     const modalHeader = (
         <View>
@@ -109,7 +107,7 @@ export default function ({ filters }) {
     const modalBody = (
         <StyledModalBody>
             <Input
-                placeholder='Property reference...'
+                placeholder='Type property reference...'
                 errorStyle={{ color: 'red' }}
                 errorMessage=''
                 containerStyle={{ marginBottom: 40 }}
@@ -125,8 +123,8 @@ export default function ({ filters }) {
             <StyledPicker
                 itemStyle={{ color: "red" }}
                 itemTextStyle={{ textAlign: "center", fontSize: 20 }}
-                selectedValue={language}
-                onValueChange={itemValue => setLanguage(itemValue)}>
+                selectedValue={homeType}
+                onValueChange={itemValue => setHomeType(itemValue)}>
                 <Picker.Item label="Select your type" value="" />
                 {filters.homeType.length && this.createPickerItem(filters.homeType)}
             </StyledPicker>
@@ -134,14 +132,14 @@ export default function ({ filters }) {
             <StyledPicker
                 selectedValue={offer}
                 onValueChange={itemValue => setOffer(itemValue)}>
-                <Picker.Item label="Select yout offer" value="" />
+                <Picker.Item label="Select your offer" value="" />
                 {filters.operationType.length && this.createPickerItem(filters.operationType)}
             </StyledPicker>
 
             <StyledPicker
                 selectedValue={city}
                 onValueChange={itemValue => setCity(itemValue)}>
-                <Picker.Item label="Select yout city" value="" />
+                <Picker.Item label="Select your city" value="" />
                 {filters.city.length && this.createPickerItem(filters.city)}
             </StyledPicker>
 
@@ -167,7 +165,7 @@ export default function ({ filters }) {
                 </StyledFooterButtons>
                 <StyledFooterButtons isClose={true}
                     onPress={() => {
-                        setModalVisible(!modalVisible);
+                        setModalVisible(!modalVisible)
                     }}>
                     <StyledButtonText>Close</StyledButtonText>
                 </StyledFooterButtons>
@@ -195,9 +193,7 @@ export default function ({ filters }) {
             backdropTransitionOutTiming={1000}
             style={{ margin: 0 }}
             isVisible={modalVisible}
-            onRequestClose={() => {
-                Alert.alert('Modal has been closed.');
-            }}>
+           >
             <StyledModal>
                 <View>
                     {modalContainer}

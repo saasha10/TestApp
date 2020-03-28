@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ThemeProvider, Card, Text } from 'react-native-elements'
+import { ThemeProvider } from 'react-native-elements'
 //import provider to connect component to redux store.
 import { Provider } from 'react-redux';
 //import your store to connect your component.
@@ -18,8 +18,8 @@ const StyledScrollView = styled.ScrollView`
   marginHorizontal: 1px;
 `
 
-const App = () => {
-  return (<Provider store={store}>
+const App = () => (
+  <Provider store={store}>
     <ThemeProvider>
       <StyledSafeAreaView>
         <StyledScrollView>
@@ -29,7 +29,6 @@ const App = () => {
       </StyledSafeAreaView>
     </ThemeProvider>
   </Provider>
-  )
-}
+)
 
 export default App;

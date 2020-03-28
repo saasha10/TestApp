@@ -12,13 +12,11 @@ const StyledViewContainer = styled.View`
 
 export default class DataList extends Component {
     componentDidMount() {
-        // this.props.getPeopleAwait()
-        // this.props.getPeopleSuperAgent()
         this.props.getPeopleAxios()
     }
 
     render() {
-        const { data, loading, filters } = this.props
+        const { data, loading } = this.props
         // console.log("COMPONENT ---> DATALIST")
         // console.log(this.props)
 
@@ -36,7 +34,7 @@ export default class DataList extends Component {
                             <MyLoaderListCard />
                         </>
                         :
-                        data.customerProperties.length &&
+                        data.customerProperties.length && 
                         data.customerProperties.map((property, i) => <Card key={i} properties={property} />)}
                 </StyledViewContainer>
             </ScrollView>
