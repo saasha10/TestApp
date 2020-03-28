@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 //import your UI from react-native
-import { ScrollView } from 'react-native';
+import { ScrollView } from 'react-native'
 import styled from 'styled-components/native'
 import Card from './utilities/CardProperty'
-import MyLoaderListCard from './utilities/Loader';
+import MyLoaderListCard from './utilities/Loader'
 
 const StyledViewContainer = styled.View`
     flex: 1;
@@ -18,9 +18,10 @@ export default class DataList extends Component {
     }
 
     render() {
-        const { data, loading } = this.props
-        console.log("COMPONENT ---> DATALIST")
-        console.log(this.props)
+        const { data, loading, filters } = this.props
+        // console.log("COMPONENT ---> DATALIST")
+        // console.log(this.props)
+
         return (
             <ScrollView>
                 <StyledViewContainer>
