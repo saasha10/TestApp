@@ -11,7 +11,7 @@ const StyledText = styled.Text`
     font-size: 24px;
     font-style: italic;
     text-align: center;
-    color: ${UIColors.greyStrong1};
+    color: ${UIColors.greyStrong2};
     border-bottom-width: 1px;
     borderColor: ${UIColors.lightGray};
     borderStyle: solid;
@@ -21,36 +21,9 @@ export default function ({ openModal }) {
     return (
         <>
         <StyledText onPress={openModal}>
-            <Icon name="account-search" size={25} style={{ color: '#505050' }} />
+            <Icon name="account-search" size={25} style={{ color: UIColors.greyStrong1 }} />
                 Search here...
         </StyledText>
         </>
-        // <TouchableOpacity onPress={(e) => {
-        //     console.log(e)
-        //     console.log()
-        //     e.persist(openModal)
-        //     console.log("working")
-        //     }}>
-        // <SearchBar
-        //     // ref={search => this.search = search}
-        //     lightTheme
-        //     // onPress={openModal}
-        //     // onChangeText={test => console.log(test)}
-        //     // onClearText={test => console.log(test)}
-        //     placeholder='Type here...'
-        //     inputStyle={{ textAlign: 'center', fontSize: 24, fontStyle: "italic" }}
-        //     placeholderTextColor='white'
-        // />
-        // </TouchableOpacity>
     )
 }
-
-/**
- * style={{
-            paddingVertical: 15,
-            paddingHorizontal: 5,
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center"
-        }}
- */
