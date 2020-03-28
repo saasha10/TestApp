@@ -1,7 +1,7 @@
 import { GET_DATA, GET_DATA_FULFILLED, GET_DATA_REJECTED } from '../constants'
 
 const initialState = {
-    //Have a people array responsible for getting the data and setting to the array.
+    //Have a data array responsible for getting the data and setting to the array.
     data: [],
     //Have the loading state indicate if it's done getting data.
     loading: true,
@@ -10,7 +10,7 @@ const initialState = {
 }
 
 //Define your reducer that will return the initialState by default
-const dataReducer = (state = initialState, action) => {
+export default function (state = initialState, action) {
     // console.log("dataReducer ")
     // console.log("state ---> ", state)
     // console.log("action ---> ", action)
@@ -25,5 +25,3 @@ const dataReducer = (state = initialState, action) => {
             return state;
     }
 }
-
-export default dataReducer
