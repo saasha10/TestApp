@@ -4,7 +4,7 @@ import DataList from '../components/dataList'
 
 //Map the redux state to your props.
 const mapStateToProps = state => ({
-  data: state.dataReducer.data,
+  properties: state.dataReducer.properties,
   loading: state.dataReducer.loading
 })
 
