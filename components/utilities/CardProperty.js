@@ -57,7 +57,8 @@ export default ({ properties }) => (
                     <StyledTextTitle>{properties.propertyOperation.operationType}</StyledTextTitle>
                     <StyledTextTitle>{properties.propertyFeatures.featuresType}</StyledTextTitle>
                     <StyleViewSubtitle>
-                        <StyledTextTitle2>{new Intl.NumberFormat("de-DE").format(parseInt(properties.propertyOperation.operationPrice))} €</StyledTextTitle2>
+                        {/* <StyledTextTitle2>{new Intl.NumberFormat("de-DE").format(parseInt(properties.propertyOperation.operationPrice))} €</StyledTextTitle2> */}
+                        <StyledTextTitle2>{properties.propertyOperation.operationPrice.toLocaleString('de-DE')} €</StyledTextTitle2>
                         <StyledTextTitle2> | {properties.propertyAddress.addressTown}</StyledTextTitle2>
                     </StyleViewSubtitle>
                 </StyledViewTitles>
