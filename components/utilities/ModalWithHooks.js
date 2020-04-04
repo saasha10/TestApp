@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Alert, View, Dimensions, Picker } from 'react-native'
+import { View, Dimensions, Picker } from 'react-native'
 import { Text, Input } from 'react-native-elements'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import MultiSlider from '@ptomasroos/react-native-multi-slider'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import Modal from 'react-native-modal'
 import { UIColors } from '../../constants/colors'
 import TextInput from '../TextSearch'
@@ -37,17 +38,17 @@ const StyledBodyView2 = styled.View`
 `
 
 const StyledPicker = styled.Picker`
-    marginBottom: 40px;
+    marginBottom: ${props => props.lastPicker ? '15px' : '10px'};
 `
 
 const StyledParentText = styled.View`
     flex-direction: row;
     justify-content: center;
+    margin: 5px;
 `
 const StyledBodyText = styled(Text)`
     text-align: center;
-    marginVertical: 10px;
-    marginHorizontal: 50px; 
+    marginVertical: 4px;
     font-size: 20px;
 `
 //-----------------------------Styled MODAL FOOTER-----------------------------------
@@ -87,15 +88,57 @@ const StyledParentModal = styled.View`
     background-color: ${UIColors.white};
 `
 //---------------------------------------- Picker Item creator to use with filters options -----------------------------------------------
-createPickerItem = filtersType => filtersType.map((element, key) => <Picker.Item label={element} value={key} key={key} />)
+createPickerItem = filtersType => filtersType.map((element, key) => <Picker.Item label={element} value={element} key={key} />)
 //---------------------------------------- MAIN -----------------------------------------------
-export default function ({ filters }) {
+export default function ({ filters, setFiltersSelected }) {
     // console.log("MODAL WITH HOOKS PROPS")
     // console.log({ filters })
+    // console.log("setFiltersSelected", setFiltersSelected)
+
     const [modalVisible, setModalVisible] = useState(false)
-    const [homeType, setHomeType] = useState('css')
-    const [offer, setOffer] = useState('css')
-    const [city, setCity] = useState('css')
+    const [homeType, setHomeType] = useState('')
+    const [offer, setOffer] = useState('')
+    const [city, setCity] = useState('')
+    const [bedRoomNum, setBedRoomNum] = useState({
+        min: 1,
+        max: 5
+    })
+    const [price, setPrice] = useState({
+        min: 200,
+        max: 20000
+    })
+    //-----------------------------HOOKS UTILITIES-----------------------------------
+    const updateBedRoomNum = value => {
+        setBedRoomNum({
+            ...bedRoomNum,
+            min: value[0],
+            max: value[1]
+        })
+    }
+    const updatePrice = value => {
+        setPrice({
+            ...price,
+            min: value[0],
+            max: value[1]
+        })
+    }
+    const handleFiltersSelected = () => {
+        filtersSelected = {
+            homeType: homeType,
+            operationType: offer,
+            city: city,
+            featuresBedRoomNumber: {
+                min: bedRoomNum.min,
+                max: bedRoomNum.max
+            },
+            operationPrice: {
+                min: price.min,
+                max: price.max
+            }
+        }
+        setFiltersSelected(filtersSelected)
+        setModalVisible(false)
+    }
     //-----------------------------MODAL HEADER-----------------------------------
     const modalHeader = (
         <View>
@@ -121,6 +164,7 @@ export default function ({ filters }) {
             />
 
             <StyledPicker
+                lastPicker={false}
                 itemStyle={{ color: "red" }}
                 itemTextStyle={{ textAlign: "center", fontSize: 20 }}
                 selectedValue={homeType}
@@ -130,6 +174,7 @@ export default function ({ filters }) {
             </StyledPicker>
 
             <StyledPicker
+                lastPicker={false}
                 selectedValue={offer}
                 onValueChange={itemValue => setOffer(itemValue)}>
                 <Picker.Item label="Select your offer" value="" />
@@ -137,6 +182,7 @@ export default function ({ filters }) {
             </StyledPicker>
 
             <StyledPicker
+                lastPicker={true}
                 selectedValue={city}
                 onValueChange={itemValue => setCity(itemValue)}>
                 <Picker.Item label="Select your city" value="" />
@@ -144,13 +190,39 @@ export default function ({ filters }) {
             </StyledPicker>
 
             <StyledBodyView2>
+                <StyledBodyText h6>Number bedroom</StyledBodyText>
                 <StyledParentText>
-                    <StyledBodyText>Room min.</StyledBodyText>
-                    <StyledBodyText>Room max.</StyledBodyText>
+                    <Text>{bedRoomNum.min}</Text>
+                    <MultiSlider
+                        trackStyle={{ backgroundColor: '#bdc3c7' }}
+                        selectedStyle={{ backgroundColor: "#5e5e5e" }}
+                        values={[bedRoomNum.min, bedRoomNum.max]}
+                        sliderLength={screenWidth - 120}
+                        onValuesChange={updateBedRoomNum}
+                        min={1}
+                        max={5}
+                        step={0}
+                        allowOverlap={false}
+                        snapped={true}
+                    />
+                    <Text>{bedRoomNum.max}</Text>
                 </StyledParentText>
+                <StyledBodyText h6>Price</StyledBodyText>
                 <StyledParentText>
-                    <StyledBodyText>Price min.</StyledBodyText>
-                    <StyledBodyText>Price max.</StyledBodyText>
+                    <Text>{price.min}</Text>
+                    <MultiSlider
+                        trackStyle={{ backgroundColor: '#c00' }}
+                        selectedStyle={{ backgroundColor: "#00cc5b" }}
+                        values={[price.min, price.max]}
+                        sliderLength={screenWidth - 120}
+                        onValuesChange={updatePrice}
+                        min={200}
+                        max={20000}
+                        step={50}
+                        allowOverlap={false}
+                        snapped={true}
+                    />
+                    <Text>{price.max}</Text>
                 </StyledParentText>
             </StyledBodyView2>
         </StyledModalBody>
@@ -161,7 +233,7 @@ export default function ({ filters }) {
             <StyledDivider />
             <StyledContainerButtons>
                 <StyledFooterButtons isClose={false}>
-                    <StyledButtonText>Accept</StyledButtonText>
+                    <StyledButtonText onPress={handleFiltersSelected}>Accept</StyledButtonText>
                 </StyledFooterButtons>
                 <StyledFooterButtons isClose={true}
                     onPress={() => {
@@ -193,7 +265,7 @@ export default function ({ filters }) {
             backdropTransitionOutTiming={1000}
             style={{ margin: 0 }}
             isVisible={modalVisible}
-           >
+        >
             <StyledModal>
                 <View>
                     {modalContainer}
