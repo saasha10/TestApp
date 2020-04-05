@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { getPeopleAxios } from '../store'
+import { getPeopleAxios } from '../actions/getData'
 import DataList from '../components/dataList'
 
 //Map the redux state to your props.
