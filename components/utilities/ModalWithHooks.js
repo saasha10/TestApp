@@ -201,7 +201,7 @@ export default function ({ filters, setFiltersSelected }) {
                         onValuesChange={updateBedRoomNum}
                         min={1}
                         max={5}
-                        step={0}
+                        step={1}
                         allowOverlap={false}
                         snapped={true}
                     />
