@@ -1,4 +1,4 @@
-import { GET_FILTERS, SET_FILTERS, SET_FILTERS_SELECTED } from '../constants'
+import { GET_FILTERS, SET_FILTERS, SET_FILTERS_SELECTED, FILTERS_NAMES } from '../constants'
 import { setProperties } from './data'
 import store from '../store/index'
 import forEach from 'lodash/forEach'
@@ -27,21 +27,23 @@ export const setFiltersSelected = filtersSelected => {
         propertiesFiltered = filter(propertiesFiltered, property => {
             if (value !== "") {
                 switch (key) {
-                    case "homeType":
+                    case FILTERS_NAMES.HOME_TYPE:
                         return property.propertyFeatures.featuresType === value
-                    case "operationType":
+                    case FILTERS_NAMES.OPERATION_TYPE:
                         return property.propertyOperation.operationType === value
-                    case "city":
+                    case FILTERS_NAMES.CITY:
                         return property.propertyAddress.addressTown === value
+                    case FILTERS_NAMES.FEATURES_BED_ROOM_NUMBER:
+                        return property.propertyFeatures.featuresBedroomNumber >= value.min && property.propertyFeatures.featuresBedroomNumber <= value.max
+                    case FILTERS_NAMES.OPERATION_PRICE:
+                        return property.propertyOperation.operationPrice >= value.min && property.propertyOperation.operationPrice <= value.max
                     default:
                         break;
                 }
             }
             return propertiesFiltered
         })
-        // console.log("result1", propertiesFiltered)
     })
-    // console.log("result2", propertiesFiltered)
     store.dispatch(setProperties(propertiesFiltered))
     return {
         type: SET_FILTERS_SELECTED,
