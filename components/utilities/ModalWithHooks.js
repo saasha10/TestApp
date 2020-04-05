@@ -104,7 +104,7 @@ export default function ({ filters, setFiltersSelected }) {
         max: 5
     })
     const [price, setPrice] = useState({
-        min: 200,
+        min: filters.operationPrice.min,
         max: 20000
     })
     //-----------------------------HOOKS UTILITIES-----------------------------------
@@ -199,8 +199,8 @@ export default function ({ filters, setFiltersSelected }) {
                         values={[bedRoomNum.min, bedRoomNum.max]}
                         sliderLength={screenWidth - 120}
                         onValuesChange={updateBedRoomNum}
-                        min={1}
-                        max={5}
+                        min={filters.featuresBedRoomNumber.min}
+                        max={filters.featuresBedRoomNumber.max}
                         step={1}
                         allowOverlap={false}
                         snapped={true}
@@ -209,20 +209,20 @@ export default function ({ filters, setFiltersSelected }) {
                 </StyledParentText>
                 <StyledBodyText h6>Price</StyledBodyText>
                 <StyledParentText>
-                    <Text>{price.min}</Text>
+                    <Text>{price.min.toLocaleString('de-DE')} €</Text>
                     <MultiSlider
                         trackStyle={{ backgroundColor: '#c00' }}
                         selectedStyle={{ backgroundColor: "#00cc5b" }}
                         values={[price.min, price.max]}
                         sliderLength={screenWidth - 120}
                         onValuesChange={updatePrice}
-                        min={200}
-                        max={20000}
+                        min={filters.operationPrice.min}
+                        max={filters.operationPrice.max}
                         step={50}
                         allowOverlap={false}
                         snapped={true}
                     />
-                    <Text>{price.max}</Text>
+                    <Text>{price.max.toLocaleString('de-DE')} €</Text>
                 </StyledParentText>
             </StyledBodyView2>
         </StyledModalBody>
