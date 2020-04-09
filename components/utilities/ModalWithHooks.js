@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import Modal from 'react-native-modal'
 import { UIColors } from '../../constants/colors'
 import TextInput from '../TextSearch'
+import get from 'lodash/get'
 //----------------------------- Dimesions -----------------------------------
 const screenWidth = Math.round(Dimensions.get('window').width)
 const screenHeight = Math.round(Dimensions.get('window').height)
@@ -103,8 +104,9 @@ export default function ({ filters, setFiltersSelected }) {
         min: 1,
         max: 5
     })
+    const priceMin = get(filters, 'operationPrice.min')
     const [price, setPrice] = useState({
-        min: filters.operationPrice.min,
+        min: priceMin,
         max: 20000
     })
     //-----------------------------HOOKS UTILITIES-----------------------------------
@@ -123,17 +125,21 @@ export default function ({ filters, setFiltersSelected }) {
         })
     }
     const handleFiltersSelected = () => {
+        const bedRoomNumMin = get(bedRoomNum, 'min')
+        const bedRoomNumMax = get(bedRoomNum, 'max')
+        const priceMin = get(price, 'min')
+        const priceMax = get(price, 'max')
         filtersSelected = {
             homeType: homeType,
             operationType: offer,
             city: city,
             featuresBedRoomNumber: {
-                min: bedRoomNum.min,
-                max: bedRoomNum.max
+                min: bedRoomNumMin,
+                max: bedRoomNumMax
             },
             operationPrice: {
-                min: price.min,
-                max: price.max
+                min: priceMin,
+                max: priceMax
             }
         }
         setFiltersSelected(filtersSelected)
