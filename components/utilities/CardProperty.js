@@ -3,6 +3,7 @@ import { TouchableNativeFeedback } from 'react-native'
 import { Card } from 'react-native-elements'
 import styled from 'styled-components/native'
 import { UIColors } from '../../constants/colors'
+import get from 'lodash/get'
 
 const StyledViewTitles = styled.View`
     flex: 1;
@@ -45,24 +46,26 @@ const StyledButtonShow = styled.Button`
     box-shadow: 5px 10px ${UIColors.grayAlmostWhite};
 `
 
-export default ({ properties }) => (
-    <Card>
-        <StyledImage source={{ uri: properties.propertyImages[0].imageUrl }} />
-        <TouchableNativeFeedback
-            onPress={() => console.log("helloooooooooooooo SASHA WAKE UP!!!! ")}
-            background={TouchableNativeFeedback.SelectableBackground()}>
+export default ({ properties }) => {
+    const operationType = get(properties, 'propertyOperation.operationType')
+    const featuresType = get(properties, 'propertyFeatures.featuresType')
+    const operationPrice = get(properties, 'propertyOperation.operationPrice').toLocaleString('de-DE')
+    const addressTown = get(properties, 'propertyAddress.addressTown')
+    return (
+        <Card>
+            <StyledImage source={{ uri: properties.propertyImages[0].imageUrl }} />
             <StyledButtonContainer>
-                <StyledButtonShow title="View"/>
+                <StyledButtonShow title="View" />
                 <StyledViewTitles>
-                    <StyledTextTitle>{properties.propertyOperation.operationType}</StyledTextTitle>
-                    <StyledTextTitle>{properties.propertyFeatures.featuresType}</StyledTextTitle>
+                    <StyledTextTitle>{operationType}</StyledTextTitle>
+                    <StyledTextTitle>{featuresType}</StyledTextTitle>
                     <StyleViewSubtitle>
                         {/* <StyledTextTitle2>{new Intl.NumberFormat("de-DE").format(parseInt(properties.propertyOperation.operationPrice))} €</StyledTextTitle2> */}
-                        <StyledTextTitle2>{properties.propertyOperation.operationPrice.toLocaleString('de-DE')} €</StyledTextTitle2>
-                        <StyledTextTitle2> | {properties.propertyAddress.addressTown}</StyledTextTitle2>
+                        <StyledTextTitle2>{operationPrice} €</StyledTextTitle2>
+                        <StyledTextTitle2> | {addressTown}</StyledTextTitle2>
                     </StyleViewSubtitle>
                 </StyledViewTitles>
             </StyledButtonContainer>
-        </TouchableNativeFeedback>
-    </Card>
-)
+        </Card>
+    )
+}
