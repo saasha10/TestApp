@@ -1,10 +1,11 @@
 import { connect } from 'react-redux'
 import { getPeopleAxios } from '../actions/getData'
 import DataList from '../components/dataList'
+import { getProperties } from '../selectors/data'
 
 //Map the redux state to your props.
 const mapStateToProps = state => ({
-  properties: state.dataReducer.properties,
+  properties: getProperties(state),
   loading: state.dataReducer.loading
 })
 
