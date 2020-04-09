@@ -1,9 +1,10 @@
 import {connect} from 'react-redux'
 import ModalWithHooks from '../components/utilities/ModalWithHooks'
 import { setFiltersSelected } from '../actions/filters'
+import { getFilters } from '../selectors/filters'
 
 const mapStateToProps = state => ({
-    filters: state.filtersReducer.filters
+    filters: getFilters(state)
 })
 
 const mapDispatchToProps = dispatch => ({
