@@ -6,6 +6,7 @@ import { getFilters } from './filters'
 import { URL_HOME_BUSSINES, URL_HOME_BUSSINES_JSON } from '../constants'
 import minBy from 'lodash/minBy'
 import maxBy from 'lodash/maxBy'
+import filter from 'lodash/filter'
 
 export const getPeopleAxios = () => {
     return dispatch => {
@@ -14,27 +15,9 @@ export const getPeopleAxios = () => {
         //Then get the data.
         axios.get(URL_HOME_BUSSINES_JSON).then(res => {
             //console.log('data----------->', res)
-            //-----------------------------FILTERS CREATION-----------------------------------
-            let main = new Main()
             const properties = res.data.customerProperties
-            const homeType = main.newArrayDifferentValues(properties, 'propertyFeatures', 'featuresType')
-            const operationType = main.newArrayDifferentValues(properties, 'propertyOperation', 'operationType')
-            const city = main.newArrayDifferentValues(properties, 'propertyAddress', 'addressTown')
-            const minBedRoom = minBy(properties, 'propertyFeatures.featuresBedroomNumber')
-            const maxBedRoom = maxBy(properties, 'propertyFeatures.featuresBedroomNumber')
-            const minPrice = minBy(properties, 'propertyOperation.operationPrice')
-            const maxPrice = maxBy(properties, 'propertyOperation.operationPrice')
-            const featuresBedRoomNumber = {
-                min: minBedRoom.propertyFeatures.featuresBedroomNumber,
-                max: maxBedRoom.propertyFeatures.featuresBedroomNumber
-            }
-            const operationPrice = {
-                min: minPrice.propertyOperation.operationPrice,
-                max: maxPrice.propertyOperation.operationPrice
-            }
-            
-            dispatch(getFilters({ homeType, operationType, city, featuresBedRoomNumber, operationPrice }))
-            //-----------------------------FILTERS CREATION-----------------------------------
+            filters = this.createFilters(properties)
+            dispatch(getFilters(filters))
             dispatch(fetchDataFulfilled(res.data))
             //Error handle the promise and set your errorMessage
         }).catch(err => dispatch(fetchDataRejected(err)))
@@ -77,4 +60,44 @@ export const getPeopleSuperAgent = () => {
                 dispatch(fetchDataFulfilled(res.body.results));
             })
     }
+}
+//-----------------------------FILTERS CREATION-----------------------------------
+createFilters = properties => {
+    const main = new Main()
+
+    const homeType = main.newArrayDifferentValues(properties, 'propertyFeatures', 'featuresType')
+    const operationType = main.newArrayDifferentValues(properties, 'propertyOperation', 'operationType')
+    const city = main.newArrayDifferentValues(properties, 'propertyAddress', 'addressTown')
+    const minBedRoom = minBy(properties, 'propertyFeatures.featuresBedroomNumber')
+    const maxBedRoom = maxBy(properties, 'propertyFeatures.featuresBedroomNumber')
+
+    const propertiesRent = filter(properties, ['propertyOperation.operationType', 'rent'])
+    const propertiesSale = filter(properties, ['propertyOperation.operationType', 'sale'])
+
+    let minPriceRent = minBy(propertiesRent, 'propertyOperation.operationPrice')
+    minPriceRent = minPriceRent.propertyOperation.operationPrice
+    let maxPriceRent = maxBy(propertiesRent, 'propertyOperation.operationPrice')
+    maxPriceRent = maxPriceRent.propertyOperation.operationPrice
+    let minPriceSale = minBy(propertiesSale, 'propertyOperation.operationPrice')
+    minPriceSale = minPriceSale.propertyOperation.operationPrice
+    let maxPriceSale = maxBy(propertiesSale, 'propertyOperation.operationPrice')
+    maxPriceSale = maxPriceSale.propertyOperation.operationPrice
+
+    const featuresBedRoomNumber = {
+        min: minBedRoom.propertyFeatures.featuresBedroomNumber,
+        max: maxBedRoom.propertyFeatures.featuresBedroomNumber
+    }
+
+    const operationPrice = {
+        priceRent: {
+            min: minPriceRent,
+            max: maxPriceRent
+        },
+        priceSale: {
+            min: minPriceSale,
+            max: maxPriceSale
+        }
+    }
+
+    return ({ homeType, operationType, city, featuresBedRoomNumber, operationPrice })
 }
