@@ -24,8 +24,9 @@ export const setFiltersSelected = filtersSelected => {
     let propertiesFiltered = state.dataReducer.data.customerProperties
 
     forEach(filtersSelected, (value, key) => {
+        const isEmpty = value === ""
         propertiesFiltered = filter(propertiesFiltered, property => {
-            if (value !== "") {
+            if (!isEmpty) {
                 switch (key) {
                     case FILTERS_NAMES.HOME_TYPE:
                         return property.propertyFeatures.featuresType === value
