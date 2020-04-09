@@ -104,11 +104,13 @@ export default function ({ filters, setFiltersSelected }) {
         min: 1,
         max: 5
     })
-    const priceMin = get(filters, 'operationPrice.min')
+    const priceMin = get(filters, 'operationPrice.priceRent.min')
+
     const [price, setPrice] = useState({
         min: priceMin,
-        max: 20000
+        max: 5000
     })
+
     //-----------------------------HOOKS UTILITIES-----------------------------------
     const updateBedRoomNum = value => {
         setBedRoomNum({
@@ -222,8 +224,8 @@ export default function ({ filters, setFiltersSelected }) {
                         values={[price.min, price.max]}
                         sliderLength={screenWidth - 120}
                         onValuesChange={updatePrice}
-                        min={filters.operationPrice.min}
-                        max={filters.operationPrice.max}
+                        min={offer === '' || offer === 'rent' ? filters.operationPrice.priceRent.min : filters.operationPrice.priceSale.min}
+                        max={offer === '' || offer === 'rent' ? filters.operationPrice.priceRent.max : filters.operationPrice.priceSale.max}
                         step={50}
                         allowOverlap={false}
                         snapped={true}
