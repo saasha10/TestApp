@@ -7,3 +7,8 @@ export const getProperties = pipe(
     getDataReducer,
     get('properties')
 )
+
+export const getLoading = pipe(
+    getDataReducer,
+    get('loading')
+)
