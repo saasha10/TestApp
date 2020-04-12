@@ -11,8 +11,8 @@ initialState = {
         },
         [FILTERS_NAMES.OPERATION_PRICE]: {
             priceRent: {
-                min: 200,
-                max: 3000
+                min: 500,
+                max: 3200
             },
             priceSale: {
                 min: 10000,
