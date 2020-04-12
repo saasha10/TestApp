@@ -42,6 +42,11 @@ const StyledPicker = styled.Picker`
     marginBottom: ${props => props.lastPicker ? '15px' : '10px'};
 `
 
+const StyledViewTextPrice = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+`
+
 const StyledParentText = styled.View`
     flex-direction: row;
     justify-content: center;
@@ -63,7 +68,7 @@ const StyledFooterButtons = styled.TouchableOpacity`
     margin: 10px; 
     paddingVertical: 10px;
     paddingHorizontal: 20px;
-    background-color: ${props => props.isClose ? UIColors.red : UIColors.green};
+    background-color: ${props => props.isClose || UIColors.green};
 `
 const StyledButtonText = styled.Text`
     color: ${UIColors.white};
@@ -104,13 +109,22 @@ export default function ({ filters, setFiltersSelected }) {
         min: 1,
         max: 5
     })
-    const priceMin = get(filters, 'operationPrice.priceRent.min')
 
-    const [price, setPrice] = useState({
-        min: priceMin,
-        max: 5000
+    const isSale = offer === 'sale'
+    const priceRentMin = get(filters, 'operationPrice.priceRent.min')
+    const priceRentMax = get(filters, 'operationPrice.priceRent.max')
+    const priceSaleMin = get(filters, 'operationPrice.priceSale.min')
+    const priceSaleMax = get(filters, 'operationPrice.priceSale.max')
+    const [priceRent, setPriceRent] = useState({
+        min: priceRentMin,
+        max: priceRentMax
     })
-
+    const [priceSale, setPriceSale] = useState({
+        min: priceSaleMin,
+        max: priceSaleMax
+    })
+    const stepPrice = !isSale ? 100 : 10000
+    const price = isSale ? priceSale : priceRent
     //-----------------------------HOOKS UTILITIES-----------------------------------
     const updateBedRoomNum = value => {
         setBedRoomNum({
@@ -120,11 +134,20 @@ export default function ({ filters, setFiltersSelected }) {
         })
     }
     const updatePrice = value => {
-        setPrice({
-            ...price,
-            min: value[0],
-            max: value[1]
-        })
+        if(isSale){
+            setPriceSale({
+                ...priceSale,
+                min: value[0],
+                max: value[1]
+            })
+        }else{
+            setPriceRent({
+                ...priceRent,
+                min: value[0],
+                max: value[1]
+            })
+        }
+        
     }
     const handleFiltersSelected = () => {
         const bedRoomNumMin = get(bedRoomNum, 'min')
@@ -216,21 +239,23 @@ export default function ({ filters, setFiltersSelected }) {
                     <Text>{bedRoomNum.max}</Text>
                 </StyledParentText>
                 <StyledBodyText h6>Price</StyledBodyText>
+                <StyledViewTextPrice >
+                    <Text style={{ marginLeft: 3 }}>{price.min.toLocaleString('de-DE')} €</Text>
+                    <Text style={{ marginRight: 3 }}>{price.max.toLocaleString('de-DE')} €</Text>
+                </StyledViewTextPrice>
                 <StyledParentText>
-                    <Text>{price.min.toLocaleString('de-DE')} €</Text>
                     <MultiSlider
                         trackStyle={{ backgroundColor: '#c00' }}
                         selectedStyle={{ backgroundColor: "#00cc5b" }}
                         values={[price.min, price.max]}
                         sliderLength={screenWidth - 120}
                         onValuesChange={updatePrice}
-                        min={offer === '' || offer === 'rent' ? filters.operationPrice.priceRent.min : filters.operationPrice.priceSale.min}
-                        max={offer === '' || offer === 'rent' ? filters.operationPrice.priceRent.max : filters.operationPrice.priceSale.max}
-                        step={50}
+                        min={!isSale ? filters.operationPrice.priceRent.min : filters.operationPrice.priceSale.min}
+                        max={!isSale ? filters.operationPrice.priceRent.max : filters.operationPrice.priceSale.max}
+                        step={stepPrice}
                         allowOverlap={false}
                         snapped={true}
                     />
-                    <Text>{price.max.toLocaleString('de-DE')} €</Text>
                 </StyledParentText>
             </StyledBodyView2>
         </StyledModalBody>
@@ -240,10 +265,10 @@ export default function ({ filters, setFiltersSelected }) {
         <View>
             <StyledDivider />
             <StyledContainerButtons>
-                <StyledFooterButtons isClose={false}>
+                <StyledFooterButtons>
                     <StyledButtonText onPress={handleFiltersSelected}>Accept</StyledButtonText>
                 </StyledFooterButtons>
-                <StyledFooterButtons isClose={true}
+                <StyledFooterButtons isClose={UIColors.red}
                     onPress={() => {
                         setModalVisible(!modalVisible)
                     }}>
