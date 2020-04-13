@@ -1,13 +1,12 @@
 import React from 'react'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import Icon from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components'
 import { UIColors } from '../constants/colors'
 
-const StyledText = styled.Text`
-    flex: 1;    
+const StyledText = styled.Text`  
     margin: 5px;
     padding: 10px;
-    height: 60px;
+    height: 50px;
     font-size: 24px;
     font-style: italic;
     text-align: center;
@@ -20,10 +19,10 @@ const StyledText = styled.Text`
 export default function ({ openModal }) {
     return (
         <>
-        <StyledText onPress={openModal}>
-            <Icon name="account-search" size={25} style={{ color: UIColors.greyStrong1 }} />
+            <StyledText onPress={openModal}>
                 Search here...
-        </StyledText>
+                <Icon name="search" size={20} style={{ color: UIColors.greyStrong1}} />
+            </StyledText>
         </>
     )
 }
