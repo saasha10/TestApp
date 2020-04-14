@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import ModalWithHooks from '../components/utilities/ModalWithHooks'
+import ModalWithHooks from '../components/ModalWithHooks'
 import { setFiltersSelected } from '../actions/filters'
 import { getFilters } from '../selectors/filters'
 

@@ -5,8 +5,8 @@ import { Text, Input } from 'react-native-elements'
 import MultiSlider from '@ptomasroos/react-native-multi-slider'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Modal from 'react-native-modal'
-import { UIColors } from '../../constants/colors'
-import TextInput from '../TextSearch'
+import { UIColors } from '../constants/colors'
+import TextInput from './TextSearch'
 import get from 'lodash/get'
 //----------------------------- Dimesions -----------------------------------
 const screenWidth = Math.round(Dimensions.get('window').width)
