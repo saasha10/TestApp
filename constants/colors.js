@@ -8,4 +8,5 @@ export const UIColors = {
     violetOfficalColor: "#b364ff",
     red: "#db2828",
     green: "#21ba45",
+    blue: "#2089dc"
 }
