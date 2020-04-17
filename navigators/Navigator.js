@@ -7,7 +7,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 //Create common pattern menu appear from left
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import Home from '../components/Home'
-import FavouriteProperties from '../components/FavouritesProperties'
+import FavouriteProperties from '../containers/FavouriteProperties'
 import Login from '../login/Login'
 import SignIn from '../login/SignIn'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
