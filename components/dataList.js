@@ -4,7 +4,6 @@ import { ScrollView } from 'react-native'
 import { Text } from 'react-native-elements'
 import styled from 'styled-components/native'
 import CardProperty from '../containers/CardProperty'
-import Card from './utilities/CardProperty'
 import MyLoaderListCard from './utilities/Loader'
 
 export const StyledViewContainer = styled.View`

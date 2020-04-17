@@ -1,14 +1,15 @@
 import get from 'lodash/fp/get'
 import pipe from 'lodash/fp/pipe'
+import { DATA_REDUCER, PROPERTIES, LOADING } from '../constants/index'
 
-export const getDataReducer = get('dataReducer')
+export const getDataReducer = get(DATA_REDUCER)
 
 export const getProperties = pipe(
     getDataReducer,
-    get('properties')
+    get(PROPERTIES)
 )
 
 export const getLoading = pipe(
     getDataReducer,
-    get('loading')
+    get(LOADING)
 )

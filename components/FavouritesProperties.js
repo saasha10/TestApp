@@ -11,7 +11,6 @@ const WrapperTitle = styled.View`
     justify-content: center;
     height: 50px;
     background-color: ${UIColors.blue};
-
 `
 
 const Title = styled.Text`

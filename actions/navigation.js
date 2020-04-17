@@ -1,5 +1,5 @@
 import { CommonActions, DrawerActions, TabActions } from '@react-navigation/native'
-import { NAVIGATE, GO_BACK_NAVIGATE, RESET_NAVIGATE, TAB_NAVIGATE, TOGGLE_DRAWER } from '../constants/types'
+import { NAVIGATE, GO_BACK_NAVIGATE, RESET_NAVIGATE, TAB_NAVIGATE, TOGGLE_DRAWER } from '../constants/navigation'
 import { navigationRef } from '../navigators/Navigator'
 
 export const navigateTo = route => ({

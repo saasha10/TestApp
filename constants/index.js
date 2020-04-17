@@ -1,4 +1,7 @@
 //DATA
+export const DATA_REDUCER = 'dataReducer'
+export const PROPERTIES = 'properties'
+export const LOADING = 'loading'
 export const COUNTER_CHANGE = 'COUNTER_CHANGE'
 //Initiate the api call
 export const GET_DATA = 'GET_DATA'

@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 //Create common pattern menu appear from left
 import { createDrawerNavigator } from '@react-navigation/drawer'
+import { STACK_NAMES, DRAWER_NAMES, TAB_NAMES } from '../constants/navigation'
 import Home from '../components/Home'
 import FavouriteProperties from '../containers/FavouriteProperties'
 import Login from '../login/Login'
@@ -19,38 +20,42 @@ const Stack = createStackNavigator()
 const Tab = createMaterialBottomTabNavigator()
 const Drawer = createDrawerNavigator()
 
+const { MENU } = STACK_NAMES
+const {MAIN, LOGIN } = DRAWER_NAMES
+const { SIGN_IN, SIGN_UP, HOME, FAVOURITE_PROPERTIES } = TAB_NAMES
+
 const AppNavigator = () =>
     <NavigationContainer ref={navigationRef}>
         <Stack.Navigator headerMode="none">
-            <Stack.Screen name="Menu" component={DrawerNavigatior} />
+            <Stack.Screen name={MENU} component={DrawerNavigatior} />
         </Stack.Navigator>
     </NavigationContainer>
 
 const DrawerNavigatior = () =>
     <Drawer.Navigator >
-        <Drawer.Screen name="Main" component={MainTabNavigator} />
-        <Drawer.Screen name="Login" component={LoginTabNavigator} />
+        <Drawer.Screen name={MAIN} component={MainTabNavigator} />
+        <Drawer.Screen name={LOGIN} component={LoginTabNavigator} />
     </Drawer.Navigator>
 
 const LoginTabNavigator = () =>
     <Tab.Navigator
-        initialRouteName="Signin"
+        initialRouteName={SIGN_IN}
         screenOptions={({ route }) => TabScreenOptions(route)}
     >
-        <Tab.Screen name="Signup" component={Login} />
-        <Tab.Screen name="Signin" component={SignIn} />
+        <Tab.Screen name={SIGN_IN} component={SignIn} />
+        <Tab.Screen name={SIGN_UP} component={Login} />
     </Tab.Navigator>
 
 const MainTabNavigator = () =>
     <Tab.Navigator
-        initialRouteName="Home"
+        initialRouteName={HOME}
         activeColor={UIColors.white}
         inactiveColor={UIColors.greyStrong2}
         barStyle={{ backgroundColor: UIColors.violetOfficalColor }}
         screenOptions={({ route }) => TabScreenOptions(route)}
     >
-        <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="FavouriteProperties" component={FavouriteProperties} />
+        <Tab.Screen name={HOME} component={Home} />
+        <Tab.Screen name={FAVOURITE_PROPERTIES} component={FavouriteProperties} />
     </Tab.Navigator>
 
 //Tab options
@@ -63,13 +68,13 @@ const TabScreenOptions = route => ({
 
 const tabsIcon = route => {
     switch (route) {
-        case 'Home':
+        case HOME:
             return 'home-group'
-        case 'FavouriteProperties':
+        case FAVOURITE_PROPERTIES:
             return 'heart'
-        case 'Signup':
+        case SIGN_UP:
             return 'account-plus'
-        case 'Signin':
+        case SIGN_IN:
             return 'login'
         default:
             return 'dog'
@@ -78,11 +83,11 @@ const tabsIcon = route => {
 
 const getHeaderTitle = route => {
     switch (route) {
-        case 'Signup':
+        case SIGN_UP:
             return 'Sign Up'
-        case 'Signin':
+        case SIGN_IN:
             return 'Sign In'
-        case 'FavouriteProperties':
+        case FAVOURITE_PROPERTIES:
             return 'Favourite Properties'
         default:
             return route
