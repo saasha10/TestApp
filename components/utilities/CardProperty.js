@@ -1,27 +1,40 @@
 import React from 'react'
-import { TouchableNativeFeedback } from 'react-native'
+import { View } from 'react-native'
 import { Card } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import styled from 'styled-components/native'
 import { UIColors } from '../../constants/colors'
 import get from 'lodash/get'
+import includes from 'lodash/includes'
 
 const StyledViewTitles = styled.View`
     flex: 1;
 `
 
 const StyledTextTitle = styled.Text`
-    font-size: 15px;
+    font-size: 17px;
     font-weight: bold;
     text-transform: capitalize;
 `
 
 const StyleViewSubtitle = styled.View`
     flex-direction: row;
+    justify-content: space-between;
+`
+
+const PriceAndTitle = styled.View`
+    flex-direction: row;
 `
 
 const StyledTextTitle2 = styled.Text`
-    font-size: 12px;
+    font-size: 15px;
     text-transform: capitalize;
+`
+
+const WrapperIcon = styled.View`
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 4px;
 `
 
 const StyledImage = styled.Image`
@@ -29,43 +42,61 @@ const StyledImage = styled.Image`
     width: 100%;
 `
 
-const StyledButtonContainer = styled.View`
+const WrapperElements = styled.View`
     flex-direction: row-reverse;
     justify-content: space-between;
-    align-items: flex-start;
-    margin: 10px 0;
-    margin-bottom: 20px;
+    margin: 5px 0;
 `
 
 const StyledButtonShow = styled.Button`
-    margin: 5px;
-    background: ${UIColors.green};
+    margin: 3px;
     border-radius: 15px;
-    font-weight: bold !important;
+    font-weight: bold;
     font-size: 24px;  
     box-shadow: 5px 10px ${UIColors.grayAlmostWhite};
 `
 
-export default ({ properties }) => {
-    const operationType = get(properties, 'propertyOperation.operationType')
-    const featuresType = get(properties, 'propertyFeatures.featuresType')
-    const operationPrice = get(properties, 'propertyOperation.operationPrice').toLocaleString('de-DE')
-    const addressTown = get(properties, 'propertyAddress.addressTown')
+export default ({ property, favouriteProperties, addFavouriteProperty, removeFavouriteProperty }) => {
+    const operationType = get(property, 'propertyOperation.operationType')
+    const featuresType = get(property, 'propertyFeatures.featuresType')
+    const operationPrice = get(property, 'propertyOperation.operationPrice').toLocaleString('de-DE')
+    const addressTown = get(property, 'propertyAddress.addressTown')
+    const isPropertyFavourite = includes(favouriteProperties, property)
+    const iconName = isPropertyFavourite ? "heart" : "heart-o"
+    const iconColor = isPropertyFavourite ? UIColors.red : UIColors.black
+
     return (
         <Card>
-            <StyledImage source={{ uri: properties.propertyImages[0].imageUrl }} />
-            <StyledButtonContainer>
-                <StyledButtonShow title="View" />
+            <StyledImage source={{ uri: property.propertyImages[0].imageUrl }} />
+            <WrapperElements>
+                <View>
+                    <StyledButtonShow title="View" />
+                    <WrapperIcon>
+                        <Icon
+                            resied
+                            name={iconName}
+                            size={25}
+                            color={iconColor}
+                            onPress={() => {
+                                isPropertyFavourite ? removeFavouriteProperty(property) : addFavouriteProperty(property)
+                                }
+                            }
+                        />
+                    </WrapperIcon>
+                </View>
                 <StyledViewTitles>
                     <StyledTextTitle>{operationType}</StyledTextTitle>
                     <StyledTextTitle>{featuresType}</StyledTextTitle>
                     <StyleViewSubtitle>
-                        {/* <StyledTextTitle2>{new Intl.NumberFormat("de-DE").format(parseInt(properties.propertyOperation.operationPrice))} €</StyledTextTitle2> */}
-                        <StyledTextTitle2>{operationPrice} €</StyledTextTitle2>
-                        <StyledTextTitle2> | {addressTown}</StyledTextTitle2>
+                        {/* <StyledTextTitle2>{new Intl.NumberFormat("de-DE").format(parseInt(property.propertyOperation.operationPrice))} €</StyledTextTitle2> */}
+                        <PriceAndTitle>
+                            <StyledTextTitle2>{operationPrice} €</StyledTextTitle2>
+                            <StyledTextTitle2> | {addressTown}</StyledTextTitle2>
+                        </PriceAndTitle>
+
                     </StyleViewSubtitle>
                 </StyledViewTitles>
-            </StyledButtonContainer>
+            </WrapperElements>
         </Card>
     )
 }
