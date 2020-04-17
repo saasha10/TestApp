@@ -5,7 +5,8 @@ export const TAB_NAVIGATE = 'TAB_NAVIGATE'
 export const TOGGLE_DRAWER = 'TOGGLE_DRAWER'
 //----------------------------->>>> SCREENS <<<<-----------------------------\\
 export const STACK_NAMES = {
-    MENU: "Menu"
+    MENU: "Menu",
+    MAIN_PROPERTY: "MainProperty"
 }
 export const DRAWER_NAMES = {
     MAIN: "Main",
