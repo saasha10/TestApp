@@ -7,7 +7,7 @@ import CardProperty from '../containers/CardProperty'
 import Card from './utilities/CardProperty'
 import MyLoaderListCard from './utilities/Loader'
 
-const StyledViewContainer = styled.View`
+export const StyledViewContainer = styled.View`
     flex: 1;
     justify-content: space-around;
 `
@@ -19,7 +19,7 @@ const StyledTextNoResult = styled(Text)`
 
 export default class DataList extends Component {
     componentDidMount() {
-        this.props.getPeopleAxios()
+       this.props.getPeopleAxios()
     }
 
     render() {
