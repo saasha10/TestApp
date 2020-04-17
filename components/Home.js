@@ -13,7 +13,7 @@ const StyledScrollView = styled.ScrollView`
   marginHorizontal: 1px;
 `
 
-export default ({ navigation }) => (
+export default () => (
     <>
         <ModalWithHooksContainer />
         <StyledSafeAreaView>

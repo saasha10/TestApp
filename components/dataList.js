@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { ScrollView } from 'react-native'
 import { Text } from 'react-native-elements'
 import styled from 'styled-components/native'
+import CardProperty from '../containers/CardProperty'
 import Card from './utilities/CardProperty'
 import MyLoaderListCard from './utilities/Loader'
 
@@ -41,7 +42,7 @@ export default class DataList extends Component {
                         </>
                         :
                         properties.length !== 0 ? 
-                        properties.map((property, i) => <Card key={i} properties={property} />)
+                        properties.map((property, i) => <CardProperty key={i} property={property} />)
                         : <StyledTextNoResult h4>Ups! No result</StyledTextNoResult>}
                 </StyledViewContainer>
             </ScrollView>
