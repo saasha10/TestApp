@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import { Card } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import styled from 'styled-components/native'
+import { STACK_NAMES } from '../../constants/navigation'
 import { UIColors } from '../../constants/colors'
 import get from 'lodash/get'
 import includes from 'lodash/includes'
@@ -56,7 +57,9 @@ const StyledButtonShow = styled.Button`
     box-shadow: 5px 10px ${UIColors.grayAlmostWhite};
 `
 
-export default ({ property, favouriteProperties, addFavouriteProperty, removeFavouriteProperty }) => {
+const { MAIN_PROPERTY } = STACK_NAMES
+
+export default ({ property, favouriteProperties, addFavouriteProperty, removeFavouriteProperty, navigate }) => {
     const operationType = get(property, 'propertyOperation.operationType')
     const featuresType = get(property, 'propertyFeatures.featuresType')
     const operationPrice = get(property, 'propertyOperation.operationPrice').toLocaleString('de-DE')
@@ -70,7 +73,10 @@ export default ({ property, favouriteProperties, addFavouriteProperty, removeFav
             <StyledImage source={{ uri: property.propertyImages[0].imageUrl }} />
             <WrapperElements>
                 <View>
-                    <StyledButtonShow title="View" />
+                    <StyledButtonShow 
+                        title="View" 
+                        onPress={() => navigate(MAIN_PROPERTY)}
+                        />
                     <WrapperIcon>
                         <Icon
                             resied

@@ -13,6 +13,7 @@ import Login from '../login/Login'
 import SignIn from '../login/SignIn'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { UIColors } from '../constants/colors'
+import MainProperty from '../components/utilities/MainProperty'
 
 export const navigationRef = React.createRef()
 
@@ -20,7 +21,7 @@ const Stack = createStackNavigator()
 const Tab = createMaterialBottomTabNavigator()
 const Drawer = createDrawerNavigator()
 
-const { MENU } = STACK_NAMES
+const { MENU, MAIN_PROPERTY } = STACK_NAMES
 const {MAIN, LOGIN } = DRAWER_NAMES
 const { SIGN_IN, SIGN_UP, HOME, FAVOURITE_PROPERTIES } = TAB_NAMES
 
@@ -28,6 +29,7 @@ const AppNavigator = () =>
     <NavigationContainer ref={navigationRef}>
         <Stack.Navigator headerMode="none">
             <Stack.Screen name={MENU} component={DrawerNavigatior} />
+            <Stack.Screen name={MAIN_PROPERTY} component={MainProperty}/>
         </Stack.Navigator>
     </NavigationContainer>
 
