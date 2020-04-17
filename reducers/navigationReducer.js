@@ -1,4 +1,4 @@
-import { NAVIGATE, GO_BACK_NAVIGATE, RESET_NAVIGATE, TAB_NAVIGATE, TOGGLE_DRAWER } from '../constants/types'
+import { NAVIGATE, GO_BACK_NAVIGATE, RESET_NAVIGATE, TAB_NAVIGATE, TOGGLE_DRAWER } from '../constants/navigation'
 
 const initialState = {
     isDrawerOpen: false,
