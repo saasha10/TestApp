@@ -13,7 +13,7 @@ import Login from '../login/Login'
 import SignIn from '../login/SignIn'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { UIColors } from '../constants/colors'
-import MainProperty from '../components/utilities/MainProperty'
+import MainProperty from '../containers/MainProperty'
 
 export const navigationRef = React.createRef()
 
