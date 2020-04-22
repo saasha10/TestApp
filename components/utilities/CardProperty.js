@@ -16,6 +16,7 @@ const StyledTextTitle = styled.Text`
     font-size: 17px;
     font-weight: bold;
     text-transform: capitalize;
+    margin: 1%;
 `
 
 const StyleViewSubtitle = styled.View`
@@ -25,6 +26,7 @@ const StyleViewSubtitle = styled.View`
 
 const PriceAndTitle = styled.View`
     flex-direction: row;
+    margin: 1%;
 `
 
 const StyledTextTitle2 = styled.Text`
@@ -59,7 +61,7 @@ const StyledButtonShow = styled.Button`
 
 const { MAIN_PROPERTY } = STACK_NAMES
 
-export default ({ property, favouriteProperties, addFavouriteProperty, removeFavouriteProperty, navigate }) => {
+export default ({ property, favouriteProperties, addFavouriteProperty, removeFavouriteProperty, propertySelected, navigate }) => {
     const operationType = get(property, 'propertyOperation.operationType')
     const featuresType = get(property, 'propertyFeatures.featuresType')
     const operationPrice = get(property, 'propertyOperation.operationPrice').toLocaleString('de-DE')
@@ -68,15 +70,23 @@ export default ({ property, favouriteProperties, addFavouriteProperty, removeFav
     const iconName = isPropertyFavourite ? "heart" : "heart-o"
     const iconColor = isPropertyFavourite ? UIColors.red : UIColors.black
 
+
     return (
-        <Card>
-            <StyledImage source={{ uri: property.propertyImages[0].imageUrl }} />
+        <Card
+            image={{ uri: property.propertyImages[0].imageUrl }}
+            imageStyle={{ width: 100, height: 220 }}
+        >
+            {/* <StyledImage source={{ uri: property.propertyImages[0].imageUrl }} /> */}
             <WrapperElements>
-                <View>
-                    <StyledButtonShow 
-                        title="View" 
-                        onPress={() => navigate(MAIN_PROPERTY)}
-                        />
+                <View style={{ justifyContent: "space-between" }}>
+                    <StyledButtonShow
+                        title="View"
+                        onPress={() => {
+                            navigate(MAIN_PROPERTY)
+                            propertySelected(property)
+                        }
+                        }
+                    />
                     <WrapperIcon>
                         <Icon
                             resied
@@ -85,7 +95,8 @@ export default ({ property, favouriteProperties, addFavouriteProperty, removeFav
                             color={iconColor}
                             onPress={() => {
                                 isPropertyFavourite ? removeFavouriteProperty(property) : addFavouriteProperty(property)
-                                }
+                                //console.log("CURRENT", childRef.current)
+                            }
                             }
                         />
                     </WrapperIcon>
