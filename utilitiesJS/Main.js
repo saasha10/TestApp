@@ -5,6 +5,7 @@ export default class Main {
     /**
      * @param arrayList -> to iterate
      * @param wordToSearch1 -> parameter to find something
+     * @param wordToSearch2 -> parameter to find something
      */
     newArrayDifferentValues = (arrayList, wordToSearch1, wordToSearch2) => {
         // console.log(arrayList)

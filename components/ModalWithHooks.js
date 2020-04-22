@@ -9,8 +9,8 @@ import { UIColors } from '../constants/colors'
 import TextInput from './TextSearch'
 import get from 'lodash/get'
 //----------------------------- Dimesions -----------------------------------
-const screenWidth = Math.round(Dimensions.get('window').width)
-const screenHeight = Math.round(Dimensions.get('window').height)
+export const screenWidth = Math.round(Dimensions.get('window').width)
+export const screenHeight = Math.round(Dimensions.get('window').height)
 //-----------------------------Styled MODAL HEADER-----------------------------------
 const StyledHeaderTitle = styled.Text`
     font-family: Cochin;
