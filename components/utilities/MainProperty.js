@@ -1,12 +1,15 @@
 import React from 'react'
-import { FlatList, SafeAreaView } from 'react-native'
-import { Card, Text, Badge } from 'react-native-elements'
+import { FlatList, View } from 'react-native'
+import { Card, Text, Badge, Divider } from 'react-native-elements'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components'
 import { UIColors } from '../../constants/colors'
 import Main from '../../utilitiesJS/Main'
-import get from 'lodash/get'
 import { screenWidth } from '../ModalWithHooks'
+import PanelCollapsible from './PanelCollapsible'
+import get from 'lodash/get'
+
+const numColumns = 2
 
 const main = new Main()
 
@@ -29,31 +32,41 @@ const TextPriceAndTown = styled.Text`
     text-transform: capitalize;
 `
 
-const WrapperFeature = styled.View`
-    flex-direction: row;
-    justify-content: space-around;
-    margin: 1px;
-`
-
 const FeatureName = styled.Text`
     font-size: 18px;
     margin: 2%;
+    color: ${UIColors.greyStrong2};
 `
+
+formatData = (dataList, numColumns) => {
+    const totalRows = Math.floor(dataList.length / numColumns)
+    let totalLastRow = dataList.length - (totalRows * numColumns)
+
+    while (totalLastRow !== 0 && totalLastRow !== numColumns) {
+        dataList.push({ key: 'blank', empty: true })
+        totalLastRow++
+    }
+    return dataList
+}
 
 function Feature({ feature }) {
     const key = Object.keys(feature)
     const value = Object.values(feature)
     const showValue = typeof value[0] !== "boolean"
 
+    if (feature.empty) {
+        return <View style={{ backgroundColor: 'transparent' }} />
+    }
+
     return (
-        <WrapperFeature>
+        <>
             <FontAwesome5Icon name={main.parserNameToIcon(key[0])}
                 type='font-awesome'
                 size={20}
             />
             <FeatureName>{main.parserFeatureName(key[0])}</FeatureName>
-            {showValue && <Badge value={value[0]} textStyle={{fontSize: 20, padding: 5}}/>}
-        </WrapperFeature>
+            {showValue && <Badge value={value[0]} textStyle={{ fontSize: 20, padding: 5 }} />}
+        </>
     )
 }
 
@@ -65,7 +78,7 @@ export default function MainProperty({ property }) {
     let featuresArray = []
     Object.entries(featuresObj).forEach(([key, value]) => {
         const showFeature = key !== 'featuresAreaConstructed' && key !== 'featuresAreaPlot' && key !== 'featuresAreaUsable' &&
-            key !== 'featuresEnergyCertificateRating' && key !== 'featuresConservation' && key !== 'featuresTypeflat' && key !== 'featuresType' 
+            key !== 'featuresEnergyCertificateRating' && key !== 'featuresConservation' && key !== 'featuresTypeflat' && key !== 'featuresType'
             && key !== 'featuresBuiltYear' && key !== 'featuresConditionedAirType' && key !== 'featuresHeatingType'
         if (showFeature) featuresArray.push({ [key]: value })
     })
@@ -79,27 +92,27 @@ export default function MainProperty({ property }) {
 
     return (
         <StyledScrollView>
-            <Card
-                image={{ uri: images[0].imageUrl }}
-                imageStyle={{ height: 300 }}
-                containerStyle={{ margin: 0 }}
-            >
-                <TypeHouse h3>{featuresType}</TypeHouse>
-                <PriceAndTown>
-                    <TextPriceAndTown>{(price).toLocaleString('de-DE')} €</TextPriceAndTown>
-                    <TextPriceAndTown>{city}</TextPriceAndTown>
-                </PriceAndTown>
-            </Card>
-            <Card style={{ marginTop: 1, width: screenWidth}}>
-                <SafeAreaView style={{flex: 1}}>
-                    <FlatList
-                        data={featuresArray}
-                        renderItem={({ item }) => <Feature feature={item} />}
-                        numColumns={2}
-                        columnWrapperStyle={{flex: 1, justifyContent: "space-around", alignItems: "center"}}
-                        keyExtractor={(value, index) => index.toString()} />
-                </SafeAreaView>
-            </Card>
+                <Card
+                    image={{ uri: images[0].imageUrl }}
+                    imageStyle={{ height: 300 }}
+                    containerStyle={{ margin: 0 }}
+                >
+                    <TypeHouse h3>{featuresType}</TypeHouse>
+                    <PriceAndTown>
+                        <TextPriceAndTown>{(price).toLocaleString('de-DE')} €</TextPriceAndTown>
+                        <TextPriceAndTown>{city}</TextPriceAndTown>
+                    </PriceAndTown>
+                </Card>
+                <Divider style={{ backgroundColor: UIColors.lightGray, paddingBottom: 4 }} />
+                <FlatList
+                    data={formatData(featuresArray, numColumns)}
+                    renderItem={({ item }) => <Feature feature={item} />}
+                    numColumns={numColumns}
+                    columnWrapperStyle={{ flex: 1, minWidth: (screenWidth / 2)-10, alignItems: "center", alignContent: "center" }}
+                    keyExtractor={(value, index) => index.toString()} />
+                <PanelCollapsible title="Description">
+                    <Text>{descriptions[0].descriptionText}</Text>
+                </PanelCollapsible>
         </StyledScrollView>
     )
 }
