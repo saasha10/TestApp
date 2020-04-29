@@ -38,6 +38,19 @@ const FeatureName = styled.Text`
     color: ${UIColors.greyStrong2};
 `
 
+createFeaturesArray = features => {
+    let result = []
+
+    Object.entries(features).forEach(([key, value]) => {
+        const showFeature = key !== 'featuresAreaConstructed' && key !== 'featuresAreaPlot' && key !== 'featuresAreaUsable' &&
+            key !== 'featuresEnergyCertificateRating' && key !== 'featuresConservation' && key !== 'featuresTypeflat' && key !== 'featuresType'
+            && key !== 'featuresBuiltYear' && key !== 'featuresConditionedAirType' && key !== 'featuresHeatingType'
+        if (showFeature) result.push({ [key]: value })
+    })
+
+    return result
+}
+
 formatData = (dataList, numColumns) => {
     const totalRows = Math.floor(dataList.length / numColumns)
     let totalLastRow = dataList.length - (totalRows * numColumns)
@@ -75,14 +88,7 @@ export default function MainProperty({ property }) {
     const contact = get(property, '`propertyContact')
     const descriptions = get(property, 'propertyDescriptions')
     const featuresObj = get(property, 'propertyFeatures')
-    let featuresArray = []
-    Object.entries(featuresObj).forEach(([key, value]) => {
-        const showFeature = key !== 'featuresAreaConstructed' && key !== 'featuresAreaPlot' && key !== 'featuresAreaUsable' &&
-            key !== 'featuresEnergyCertificateRating' && key !== 'featuresConservation' && key !== 'featuresTypeflat' && key !== 'featuresType'
-            && key !== 'featuresBuiltYear' && key !== 'featuresConditionedAirType' && key !== 'featuresHeatingType'
-        if (showFeature) featuresArray.push({ [key]: value })
-    })
-
+    const featuresArray = createFeaturesArray(featuresObj)
     const featuresType = get(featuresObj, 'featuresType')
     const images = get(property, 'propertyImages')
     const operation = get(property, 'propertyOperation')
@@ -108,7 +114,7 @@ export default function MainProperty({ property }) {
                     data={formatData(featuresArray, numColumns)}
                     renderItem={({ item }) => <Feature feature={item} />}
                     numColumns={numColumns}
-                    columnWrapperStyle={{ flex: 1, minWidth: (screenWidth / 2)-10, alignItems: "center", alignContent: "center" }}
+                    columnWrapperStyle={{ flex: 1, alignItems: "center", alignContent: "center" }}
                     keyExtractor={(value, index) => index.toString()} />
                 <PanelCollapsible title="Description">
                     <Text>{descriptions[0].descriptionText}</Text>
