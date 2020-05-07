@@ -6,7 +6,8 @@ export const TOGGLE_DRAWER = 'TOGGLE_DRAWER'
 //----------------------------->>>> SCREENS <<<<-----------------------------\\
 export const STACK_NAMES = {
     MENU: "Menu",
-    MAIN_PROPERTY: "MainProperty"
+    MAIN_PROPERTY: "MainProperty",
+    BOOK_VISIT: "BookVisit"
 }
 export const DRAWER_NAMES = {
     MAIN: "Main",
