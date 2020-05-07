@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
         case NAVIGATE:
             return {
                 ...state,
-                stackView: state.stackView.concat([action.route])
+                stackView: action.route
             }
         case GO_BACK_NAVIGATE:
             return {
