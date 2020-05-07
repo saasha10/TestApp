@@ -99,7 +99,7 @@ function Feature({ feature }) {
                 size={20}
             />
             <FeatureName>{main.parserFeatureName(key[0])}</FeatureName>
-            <View>{showValue && <Badge value={value[0]} status="primary"/>}</View>
+            <View>{showValue && <Badge value={value[0]} status="primary" />}</View>
         </StyledDetailsWrapper>
     )
 }
@@ -139,7 +139,7 @@ export default function MainProperty({ property }) {
             <Divider style={{ backgroundColor: UIColors.lightGray, paddingBottom: 4 }} />
             <FlatList
                 data={formatData(featuresArray, numColumns)}
-                style={{flex: 1}}
+                style={{ flex: 1 }}
                 renderItem={({ item }) => <Feature feature={item} />}
                 numColumns={numColumns}
                 keyExtractor={(value, index) => index.toString()} />
