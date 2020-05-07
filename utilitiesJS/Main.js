@@ -1,5 +1,22 @@
 import { FEATURES } from '../constants/features'
-const { BATHROOM, BEDROOM, HEATING, CONDITIONED_AIR, ORIENTATION, PARKING, POOL, TERRACE, GARDEN, WARDROBES, STORAGE, EQUIPPED, LIFT, PENT_HOUSE, DOORMAN } = FEATURES
+const { 
+    BATHROOM, 
+    BEDROOM, 
+    HEATING, 
+    CONDITIONED_AIR, 
+    ORIENTATION, 
+    PARKING, 
+    POOL, 
+    TERRACE, 
+    GARDEN, 
+    WARDROBES, 
+    STORAGE, 
+    EQUIPPED, 
+    EQUIPPED_KITCHEN, 
+    LIFT, 
+    PENT_HOUSE, 
+    DOORMAN 
+} = FEATURES
 export default class Main {
     constructor() {
     }
@@ -53,6 +70,7 @@ export default class Main {
             case STORAGE:
                 return 'Warehouse'
             case EQUIPPED:
+            case EQUIPPED_KITCHEN:
                 return 'Equipped'
             case LIFT:
                 return 'Lift'

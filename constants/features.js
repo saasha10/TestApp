@@ -24,6 +24,7 @@ export const FEATURES = {
     WARDROBES: "featuresWardrobes",
     STORAGE: "featuresStorage",
     EQUIPPED: "featuresEquippedWithFurniture",
+    EQUIPPED_KITCHEN: 'featuresEquippedKitchen',
     LIFT: "featuresLiftAvailable",
     PENT_HOUSE: "featuresPenthouse"
 }
