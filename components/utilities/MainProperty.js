@@ -5,9 +5,12 @@ import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components'
 import { UIColors } from '../../constants/colors'
 import Main from '../../utilitiesJS/Main'
-import { screenWidth } from '../ModalWithHooks'
+import { screenWidth, screenHeight } from '../ModalWithHooks'
 import PanelCollapsible from './PanelCollapsible'
 import get from 'lodash/get'
+import MapView, { PROVIDER_GOOGLE, Circle } from 'react-native-maps'
+
+const heightMap = Math.floor(screenHeight / 2)
 
 const numColumns = 2
 
@@ -32,10 +35,29 @@ const TextPriceAndTown = styled.Text`
     text-transform: capitalize;
 `
 
+const StyledDetailsWrapper = styled.View`
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: flex-start;
+    flex: 1;
+`
+
 const FeatureName = styled.Text`
     font-size: 18px;
     margin: 2%;
     color: ${UIColors.greyStrong2};
+`
+
+const StyledMapWrapper = styled.View`
+    height: ${heightMap};
+    width: ${screenWidth};
+    alignItems: center;
+`
+
+const StyledMapView = styled(MapView)`
+    height: ${heightMap};
+    width: ${screenWidth};
 `
 
 createFeaturesArray = features => {
@@ -68,23 +90,28 @@ function Feature({ feature }) {
     const showValue = typeof value[0] !== "boolean"
 
     if (feature.empty) {
-        return <View style={{ backgroundColor: 'transparent' }} />
+        return <StyledDetailsWrapper style={{ backgroundColor: 'transparent' }} />
     }
 
     return (
-        <>
+        <StyledDetailsWrapper>
             <FontAwesome5Icon name={main.parserNameToIcon(key[0])}
-                type='font-awesome'
                 size={20}
             />
             <FeatureName>{main.parserFeatureName(key[0])}</FeatureName>
-            {showValue && <Badge value={value[0]} textStyle={{ fontSize: 20, padding: 5 }} />}
-        </>
+            <View>{showValue && <Badge value={value[0]} status="primary"/>}</View>
+        </StyledDetailsWrapper>
     )
 }
 
 export default function MainProperty({ property }) {
     const address = get(property, 'propertyAddress')
+    const latLng = {
+        latitude: get(address, 'addressCoordinatesLatitude'),
+        longitude: get(address, 'addressCoordinatesLongitude'),
+        latitudeDelta: 0.015,
+        longitudeDelta: 0.0121,
+    }
     const contact = get(property, '`propertyContact')
     const descriptions = get(property, 'propertyDescriptions')
     const featuresObj = get(property, 'propertyFeatures')
@@ -98,27 +125,39 @@ export default function MainProperty({ property }) {
 
     return (
         <StyledScrollView>
-                <Card
-                    image={{ uri: images[0].imageUrl }}
-                    imageStyle={{ height: 300 }}
-                    containerStyle={{ margin: 0 }}
+            <Card
+                image={{ uri: images[0].imageUrl }}
+                imageStyle={{ height: 300 }}
+                containerStyle={{ margin: 0 }}
+            >
+                <TypeHouse h3>{featuresType}</TypeHouse>
+                <PriceAndTown>
+                    <TextPriceAndTown>{(price).toLocaleString('de-DE')} €</TextPriceAndTown>
+                    <TextPriceAndTown>{city}</TextPriceAndTown>
+                </PriceAndTown>
+            </Card>
+            <Divider style={{ backgroundColor: UIColors.lightGray, paddingBottom: 4 }} />
+            <FlatList
+                data={formatData(featuresArray, numColumns)}
+                style={{flex: 1}}
+                renderItem={({ item }) => <Feature feature={item} />}
+                numColumns={numColumns}
+                keyExtractor={(value, index) => index.toString()} />
+            <PanelCollapsible title="Description">
+                <Text>{descriptions[0].descriptionText}</Text>
+            </PanelCollapsible>
+            <StyledMapWrapper>
+                <StyledMapView
+                    provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+                    region={latLng}
                 >
-                    <TypeHouse h3>{featuresType}</TypeHouse>
-                    <PriceAndTown>
-                        <TextPriceAndTown>{(price).toLocaleString('de-DE')} €</TextPriceAndTown>
-                        <TextPriceAndTown>{city}</TextPriceAndTown>
-                    </PriceAndTown>
-                </Card>
-                <Divider style={{ backgroundColor: UIColors.lightGray, paddingBottom: 4 }} />
-                <FlatList
-                    data={formatData(featuresArray, numColumns)}
-                    renderItem={({ item }) => <Feature feature={item} />}
-                    numColumns={numColumns}
-                    columnWrapperStyle={{ flex: 1, alignItems: "center", alignContent: "center" }}
-                    keyExtractor={(value, index) => index.toString()} />
-                <PanelCollapsible title="Description">
-                    <Text>{descriptions[0].descriptionText}</Text>
-                </PanelCollapsible>
+                    <Circle
+                        center={latLng}
+                        radius={200}
+                        strokeColor='#f9fafb'
+                        fillColor='rgba(183, 183, 183, 0.5)' />
+                </StyledMapView>
+            </StyledMapWrapper>
         </StyledScrollView>
     )
 }
