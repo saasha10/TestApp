@@ -36,6 +36,7 @@ export default function ({ title, children }) {
                         name={iconName}
                         type='font-awesome'
                         color={UIColors.blue}
+                        size={28}
                         containerStyle={{ padding: 5 }} />
                 </TouchableHighlight>
             </View>
