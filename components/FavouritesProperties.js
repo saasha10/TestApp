@@ -6,14 +6,14 @@ import CardProperty from '../containers/CardProperty'
 import { UIColors } from '../constants/colors'
 import styled from 'styled-components'
 
-const WrapperTitle = styled.View`
+export const WrapperTitle = styled.View`
     align-items: center;
     justify-content: center;
     height: 50px;
     background-color: ${UIColors.blue};
 `
 
-const Title = styled.Text`
+export const Title = styled.Text`
     margin: 5px;
     font-size: 24px;
     color: ${UIColors.white};
