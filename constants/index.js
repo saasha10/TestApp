@@ -12,6 +12,7 @@ export const GET_DATA_REJECTED = 'GET_DATA_REJECTED'
 //PROPERTIES
 export const SET_PROPERTIES = 'SET_PROPERTIES'
 export const PROPERTY_SELECTED = 'PROPERTY_SELECTED'
+export const PROPERTY_REFERENCE = 'propertyReference'
 //URL
 export const URL_HOME_BUSSINES_JSON = 'http://www.inmomallorcabusiness.com/panel/scripts/urlJSON.php'
 export const URL_HOME_BUSSINES = 'http://www.mallorcabusinesslife.com/panel/scripts/urlXCP.php'
