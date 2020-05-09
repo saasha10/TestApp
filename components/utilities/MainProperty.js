@@ -2,6 +2,7 @@ import React from 'react'
 import { Platform, Linking, FlatList, View } from 'react-native'
 import { Card, Text, Badge, Divider, Button } from 'react-native-elements'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
 import styled from 'styled-components'
 import { STACK_NAMES } from '../../constants/navigation'
 import { UIColors } from '../../constants/colors'
@@ -175,14 +176,14 @@ export default function MainProperty({ property, navigate }) {
             </StyledScrollView>
             <Button
                 icon={
-                    <FontAwesome5Icon
+                    <FontAwesomeIcon
                         name="phone"
                         size={25}
                         color="white"
                     />
                 }
                 onPress={() => makeCall(phoneNumber)}
-                buttonStyle={{ borderRadius: 50, backgroundColor: 'green' }}
+                buttonStyle={{ borderRadius: 25, backgroundColor: 'green' }}
                 containerStyle={{ position: "absolute", bottom: 10, right: 100 }}
             />
             <Button
@@ -196,7 +197,7 @@ export default function MainProperty({ property, navigate }) {
                 iconRight
                 title="Visit"
                 onPress={() => navigate(BOOK_VISIT)}
-                buttonStyle={{ borderRadius: 25, backgroundColor: 'red' }}
+                buttonStyle={{ borderRadius: 25, backgroundColor: UIColors.blue }}
                 titleStyle={{ fontSize: 18, paddingRight: 4 }}
                 containerStyle={{ position: "absolute", bottom: 10, right: 10 }}
             />
