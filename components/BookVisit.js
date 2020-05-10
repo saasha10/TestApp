@@ -5,9 +5,10 @@ import { Input, Button } from 'react-native-elements'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
 import { WrapperTitle, Title } from './FavouritesProperties'
-import { UIColors } from '../constants/colors'
 import { ScrollView } from 'react-native-gesture-handler'
 import DateTimePicker from '@react-native-community/datetimepicker'
+import { UIColors } from '../constants/colors'
+import RootModal from './utilities/RootModal'
 
 const StyledWrapperTitle = styled(WrapperTitle)`
     margin-bottom: 10px;
@@ -24,6 +25,22 @@ const StyledInput = {
 const StyledIcon = {
     marginRight: 10
 }
+
+const WrapperModalText = styled.View`
+    flex-direction: row;
+`
+
+const StyledModalText = styled.Text`
+    font-size: 18;
+    font-weight: ${props => props.bold ? props.bold : 'normal'};
+`
+
+const StyledModalConfirm = styled.Text`
+    font-size: 20;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px;
+`
 
 const sizeIcon = 24
 
@@ -47,6 +64,7 @@ export default function ({ propertyReference }) {
     const [date, setDate] = useState(new Date())
     const [mode, setMode] = useState('date')
     const [show, setShow] = useState(false)
+    const [showModal, setShowModal] = useState(false)
 
     const valueDateAndTime = formatValue(date)
 
@@ -167,6 +185,17 @@ export default function ({ propertyReference }) {
                     />
                 </WrapperInputs>
             </ScrollView>
+            <RootModal statusModal={showModal} setStatusModal={setShowModal}>
+                <WrapperModalText>
+                    <StyledModalText bold='bold'>Date: </StyledModalText>
+                    <StyledModalText>{valueDateAndTime.date}</StyledModalText>
+                </WrapperModalText>
+                <WrapperModalText>
+                    <StyledModalText bold='bold'>Time: </StyledModalText>
+                    <StyledModalText>{valueDateAndTime.time}</StyledModalText>
+                </WrapperModalText>
+                <StyledModalConfirm>Are you sure ?</StyledModalConfirm>
+            </RootModal>
             <Button
                 icon={
                     <FontAwesome5Icon
@@ -177,7 +206,7 @@ export default function ({ propertyReference }) {
                 }
                 iconRight
                 title="Book"
-                onPress={() => console.log('BOOKED')}
+                onPress={() => setShowModal(true)}
                 buttonStyle={{ borderRadius: 25, backgroundColor: UIColors.blue }}
                 titleStyle={{ fontSize: 20, paddingRight: 4 }}
                 containerStyle={{ position: "absolute", bottom: 10, right: 10 }}
