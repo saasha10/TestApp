@@ -28,3 +28,6 @@ export const FILTERS_NAMES = {
     FEATURES_BED_ROOM_NUMBER: "featuresBedRoomNumber",
     OPERATION_PRICE: "operationPrice"
 }
+//LOCALE
+export const SET_LOCALE = 'SET_LOCALE' 
+export const SET_LANG = 'SET_LANG' 
