@@ -2,6 +2,7 @@ import React from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import styled from 'styled-components'
 import { UIColors } from '../constants/colors'
+import { connectLocale } from './HOCC/connectLocale'
 
 const StyledText = styled.Text`  
     margin: 5px;
@@ -16,13 +17,15 @@ const StyledText = styled.Text`
     borderStyle: solid;
 `
 
-export default function ({ openModal }) {
+function TextSearch ({ openModal, message }) {
     return (
         <>
             <StyledText onPress={openModal}>
-                Search here...
+                {message['Search here...']}
                 <Icon name="search" size={20} style={{ color: UIColors.greyStrong1}} />
             </StyledText>
         </>
     )
 }
+
+export default connectLocale(TextSearch)

@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import { addFavouriteProperty, removeFavouriteProperty, propertySelected } from '../actions/properties'
 import { navigate } from '../actions/navigation'
+import { connectLocale } from '../components/HOCC/connectLocale'
 import CardProperty from '../components/utilities/CardProperty'
 import { getFavouriteProperties } from '../selectors/favouriteProperties'
 
@@ -15,4 +17,6 @@ const mapDispatchToProps = dispatch => ({
     navigate: state => dispatch(navigate(state))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(CardProperty)
+export default compose(
+    connectLocale,
+    connect(mapStateToProps, mapDispatchToProps))(CardProperty)
