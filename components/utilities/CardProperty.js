@@ -61,7 +61,7 @@ const StyledButtonShow = styled.Button`
 
 const { MAIN_PROPERTY } = STACK_NAMES
 
-export default ({ property, favouriteProperties, addFavouriteProperty, removeFavouriteProperty, propertySelected, navigate }) => {
+export default ({ property, favouriteProperties, addFavouriteProperty, removeFavouriteProperty, propertySelected, navigate, message }) => {
     const operationType = get(property, 'propertyOperation.operationType')
     const featuresType = get(property, 'propertyFeatures.featuresType')
     const operationPrice = get(property, 'propertyOperation.operationPrice').toLocaleString('de-DE')
@@ -80,7 +80,7 @@ export default ({ property, favouriteProperties, addFavouriteProperty, removeFav
             <WrapperElements>
                 <View style={{ justifyContent: "space-between" }}>
                     <StyledButtonShow
-                        title="View"
+                        title={message.View}
                         onPress={() => {
                             navigate(MAIN_PROPERTY)
                             propertySelected(property)
@@ -93,17 +93,13 @@ export default ({ property, favouriteProperties, addFavouriteProperty, removeFav
                             name={iconName}
                             size={25}
                             color={iconColor}
-                            onPress={() => {
-                                isPropertyFavourite ? removeFavouriteProperty(property) : addFavouriteProperty(property)
-                                //console.log("CURRENT", childRef.current)
-                            }
-                            }
+                            onPress={() => isPropertyFavourite ? removeFavouriteProperty(property) : addFavouriteProperty(property)}
                         />
                     </WrapperIcon>
                 </View>
                 <StyledViewTitles>
-                    <StyledTextTitle>{operationType}</StyledTextTitle>
-                    <StyledTextTitle>{featuresType}</StyledTextTitle>
+                    <StyledTextTitle>{message[operationType]}</StyledTextTitle>
+                    <StyledTextTitle>{message[featuresType]}</StyledTextTitle>
                     <StyleViewSubtitle>
                         {/* <StyledTextTitle2>{new Intl.NumberFormat("de-DE").format(parseInt(property.propertyOperation.operationPrice))} €</StyledTextTitle2> */}
                         <PriceAndTitle>
