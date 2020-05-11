@@ -134,20 +134,20 @@ export default function ({ filters, setFiltersSelected }) {
         })
     }
     const updatePrice = value => {
-        if(isSale){
+        if (isSale) {
             setPriceSale({
                 ...priceSale,
                 min: value[0],
                 max: value[1]
             })
-        }else{
+        } else {
             setPriceRent({
                 ...priceRent,
                 min: value[0],
                 max: value[1]
             })
         }
-        
+
     }
     const handleFiltersSelected = () => {
         const bedRoomNumMin = get(bedRoomNum, 'min')
@@ -265,14 +265,12 @@ export default function ({ filters, setFiltersSelected }) {
         <View>
             <StyledDivider />
             <StyledContainerButtons>
+                <StyledFooterButtons isClose={UIColors.red}
+                    onPress={() => setModalVisible(!modalVisible)}>
+                    <StyledButtonText>Close</StyledButtonText>
+                </StyledFooterButtons>
                 <StyledFooterButtons>
                     <StyledButtonText onPress={handleFiltersSelected}>Accept</StyledButtonText>
-                </StyledFooterButtons>
-                <StyledFooterButtons isClose={UIColors.red}
-                    onPress={() => {
-                        setModalVisible(!modalVisible)
-                    }}>
-                    <StyledButtonText>Close</StyledButtonText>
                 </StyledFooterButtons>
             </StyledContainerButtons>
         </View>
@@ -314,6 +312,6 @@ export default function ({ filters, setFiltersSelected }) {
                 {modal}
             </StyledParentModal>
         </>
-    );
+    )
 
 }
