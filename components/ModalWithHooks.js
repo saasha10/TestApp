@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { View, Dimensions, Picker } from 'react-native'
+import { View, Dimensions, Picker, ScrollView } from 'react-native'
 import { Text, Input } from 'react-native-elements'
 import MultiSlider from '@ptomasroos/react-native-multi-slider'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -8,6 +8,7 @@ import Modal from 'react-native-modal'
 import { UIColors } from '../constants/colors'
 import TextInput from './TextSearch'
 import get from 'lodash/get'
+
 //----------------------------- Dimesions -----------------------------------
 export const screenWidth = Math.round(Dimensions.get('window').width)
 export const screenHeight = Math.round(Dimensions.get('window').height)
@@ -94,9 +95,12 @@ const StyledParentModal = styled.View`
     background-color: ${UIColors.white};
 `
 //---------------------------------------- Picker Item creator to use with filters options -----------------------------------------------
-createPickerItem = filtersType => filtersType.map((element, key) => <Picker.Item label={element} value={element} key={key} />)
+createPickerItem = (filtersType, message) => filtersType.map((element, key) => {
+    const labelValue = message ? message[element] : element
+    return <Picker.Item label={labelValue} value={element} key={key} />
+})
 //---------------------------------------- MAIN -----------------------------------------------
-export default function ({ filters, setFiltersSelected }) {
+export default function ({ filters, setFiltersSelected, message }) {
     // console.log("MODAL WITH HOOKS PROPS")
     // console.log({ filters })
     // console.log("setFiltersSelected", setFiltersSelected)
@@ -173,7 +177,7 @@ export default function ({ filters, setFiltersSelected }) {
     //-----------------------------MODAL HEADER-----------------------------------
     const modalHeader = (
         <View>
-            <StyledHeaderTitle>Filters</StyledHeaderTitle>
+            <StyledHeaderTitle>{message.Filters}</StyledHeaderTitle>
             <StyledDivider />
         </View>
     )
@@ -181,7 +185,7 @@ export default function ({ filters, setFiltersSelected }) {
     const modalBody = (
         <StyledModalBody>
             <Input
-                placeholder='Type property reference...'
+                placeholder={message['Type property reference...']}
                 errorStyle={{ color: 'red' }}
                 errorMessage=''
                 containerStyle={{ marginBottom: 40 }}
@@ -200,28 +204,28 @@ export default function ({ filters, setFiltersSelected }) {
                 itemTextStyle={{ textAlign: "center", fontSize: 20 }}
                 selectedValue={homeType}
                 onValueChange={itemValue => setHomeType(itemValue)}>
-                <Picker.Item label="Select your type" value="" />
-                {filters.homeType.length && this.createPickerItem(filters.homeType)}
+                <Picker.Item label={message["Select your type"]} value="" />
+                {filters.homeType.length && createPickerItem(filters.homeType, message)}
             </StyledPicker>
 
             <StyledPicker
                 lastPicker={false}
                 selectedValue={offer}
                 onValueChange={itemValue => setOffer(itemValue)}>
-                <Picker.Item label="Select your offer" value="" />
-                {filters.operationType.length && this.createPickerItem(filters.operationType)}
+                <Picker.Item label={message["Select your offer"]} value="" />
+                {filters.operationType.length && createPickerItem(filters.operationType, message)}
             </StyledPicker>
 
             <StyledPicker
                 lastPicker={true}
                 selectedValue={city}
                 onValueChange={itemValue => setCity(itemValue)}>
-                <Picker.Item label="Select your city" value="" />
-                {filters.city.length && this.createPickerItem(filters.city)}
+                <Picker.Item label={message["Select your city"]} value="" />
+                {filters.city.length && createPickerItem(filters.city)}
             </StyledPicker>
 
             <StyledBodyView2>
-                <StyledBodyText h6>Number bedroom</StyledBodyText>
+                <StyledBodyText h6>{message["Number bedroom"]}</StyledBodyText>
                 <StyledParentText>
                     <Text>{bedRoomNum.min}</Text>
                     <MultiSlider
@@ -238,7 +242,7 @@ export default function ({ filters, setFiltersSelected }) {
                     />
                     <Text>{bedRoomNum.max}</Text>
                 </StyledParentText>
-                <StyledBodyText h6>Price</StyledBodyText>
+                <StyledBodyText h6>{message.Price}</StyledBodyText>
                 <StyledViewTextPrice >
                     <Text style={{ marginLeft: 3 }}>{price.min.toLocaleString('de-DE')} €</Text>
                     <Text style={{ marginRight: 3 }}>{price.max.toLocaleString('de-DE')} €</Text>
@@ -279,7 +283,9 @@ export default function ({ filters, setFiltersSelected }) {
     const modalContainer = (
         <StyledModalContainer>
             {modalHeader}
-            {modalBody}
+            <ScrollView>
+                {modalBody}
+            </ScrollView>
             {modalFooter}
         </StyledModalContainer>
     )
