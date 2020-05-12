@@ -133,7 +133,7 @@ export default function MainProperty({ property, navigate }) {
     const featuresType = get(featuresObj, 'featuresType')
     const images = get(property, 'propertyImages')
     const operation = get(property, 'propertyOperation')
-    const price = get(operation, 'operationPrice')
+    const price = get(operation, 'operationPrice').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
     const city = get(address, 'addressTown')
 
 
@@ -147,7 +147,7 @@ export default function MainProperty({ property, navigate }) {
                 >
                     <TypeHouse h3>{featuresType}</TypeHouse>
                     <PriceAndTown>
-                        <TextPriceAndTown>{(price).toLocaleString('de-DE')} €</TextPriceAndTown>
+                        <TextPriceAndTown>{price} €</TextPriceAndTown>
                         <TextPriceAndTown>{city}</TextPriceAndTown>
                     </PriceAndTown>
                 </Card>

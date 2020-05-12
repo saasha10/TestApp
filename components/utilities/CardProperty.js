@@ -64,7 +64,7 @@ const { MAIN_PROPERTY } = STACK_NAMES
 export default ({ property, favouriteProperties, addFavouriteProperty, removeFavouriteProperty, propertySelected, navigate, message }) => {
     const operationType = get(property, 'propertyOperation.operationType')
     const featuresType = get(property, 'propertyFeatures.featuresType')
-    const operationPrice = get(property, 'propertyOperation.operationPrice').toLocaleString('de-DE')
+    const operationPrice = get(property, 'propertyOperation.operationPrice').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
     const addressTown = get(property, 'propertyAddress.addressTown')
     const isPropertyFavourite = includes(favouriteProperties, property)
     const iconName = isPropertyFavourite ? "heart" : "heart-o"
