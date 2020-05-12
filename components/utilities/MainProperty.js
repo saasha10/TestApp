@@ -56,7 +56,7 @@ const FeatureName = styled.Text`
 const StyledMapWrapper = styled.View`
     height: ${heightMap};
     width: ${screenWidth};
-    alignItems: center;
+    align-items: center;
 `
 
 const StyledMapView = styled(MapView)`
