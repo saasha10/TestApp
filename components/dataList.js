@@ -9,6 +9,7 @@ import MyLoaderListCard from './utilities/Loader'
 export const StyledViewContainer = styled.View`
     flex: 1;
     justify-content: space-around;
+    margin: 4px;
 `
 
 const StyledTextNoResult = styled(Text)`
@@ -18,7 +19,7 @@ const StyledTextNoResult = styled(Text)`
 
 export default class DataList extends Component {
     componentDidMount() {
-       this.props.getPeopleAxios()
+        this.props.getPeopleAxios()
     }
 
     render() {
@@ -40,9 +41,9 @@ export default class DataList extends Component {
                             <MyLoaderListCard />
                         </>
                         :
-                        properties.length !== 0 ? 
-                        properties.map((property, i) => <CardProperty key={i} property={property} />)
-                        : <StyledTextNoResult h4>Ups! No result</StyledTextNoResult>}
+                        properties.length !== 0 ?
+                            properties.map((property, i) => <CardProperty key={i} property={property} />)
+                            : <StyledTextNoResult h4>Ups! No result</StyledTextNoResult>}
                 </StyledViewContainer>
             </ScrollView>
         )
