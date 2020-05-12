@@ -1,6 +1,7 @@
 import { GET_FILTERS, SET_FILTERS, SET_FILTERS_SELECTED, FILTERS_NAMES } from '../constants'
 import { setProperties } from './data'
 import store from '../store/index'
+import { getCustomerProperties } from '../selectors/data'
 import forEach from 'lodash/forEach'
 import filter from 'lodash/filter'
 
@@ -21,7 +22,7 @@ export const setFilters = filters => {
 export const setFiltersSelected = filtersSelected => {
     const state = store.getState()
 
-    let propertiesFiltered = state.dataReducer.data.customerProperties
+    let propertiesFiltered = getCustomerProperties(state)
 
     forEach(filtersSelected, (value, key) => {
         const isEmpty = value === ""
