@@ -114,7 +114,6 @@ export default function ({ propertyReference }) {
                                 name='user-tie'
                                 size={sizeIcon}
                             />}
-                        label='Your name'
                         containerStyle={StyledInput}
                         leftIconContainerStyle={StyledIcon}
                     />
@@ -126,7 +125,6 @@ export default function ({ propertyReference }) {
                                 size={26}
                                 color='green'
                             />}
-                        label='Your phone'
                         containerStyle={StyledInput}
                         leftIconContainerStyle={StyledIcon}
                         keyboardType='numeric'
@@ -139,7 +137,6 @@ export default function ({ propertyReference }) {
                                 size={sizeIcon}
                                 color='red'
                             />}
-                        label='Your email'
                         containerStyle={StyledInput}
                         leftIconContainerStyle={StyledIcon}
                     />
