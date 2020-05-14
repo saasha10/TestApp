@@ -60,7 +60,7 @@ const formatValue = date => {
     })
 }
 
-export default function ({ propertyReference }) {
+export default function ({ propertyReference, message }) {
     const [date, setDate] = useState(new Date())
     const [mode, setMode] = useState('date')
     const [show, setShow] = useState(false)
@@ -90,7 +90,7 @@ export default function ({ propertyReference }) {
     return (
         <>
             <StyledWrapperTitle>
-                <Title>Book visit</Title>
+                <Title>{message['Book visit']}</Title>
             </StyledWrapperTitle>
             <View>
                 {show && (
@@ -108,7 +108,7 @@ export default function ({ propertyReference }) {
             <ScrollView>
                 <WrapperInputs>
                     <Input
-                        placeholder='Name'
+                        placeholder={message.Name}
                         leftIcon={
                             <FontAwesome5Icon
                                 name='user-tie'
@@ -118,7 +118,7 @@ export default function ({ propertyReference }) {
                         leftIconContainerStyle={StyledIcon}
                     />
                     <Input
-                        placeholder='Phone'
+                        placeholder={message.Phone}
                         leftIcon={
                             <FontAwesomeIcon
                                 name='phone'
@@ -148,7 +148,7 @@ export default function ({ propertyReference }) {
                                 name='calendar-alt'
                                 size={sizeIcon}
                             />}
-                        label='Day of your visit'
+                        label={message['Day of your visit']}
                         containerStyle={StyledInput}
                         onFocus={showDatepicker}
                         value={valueDateAndTime.date}
@@ -161,7 +161,7 @@ export default function ({ propertyReference }) {
                                 size={sizeIcon}
                                 name='user-clock'
                             />}
-                        label='Time of your visit'
+                        label={message['Time of your visit']}
                         containerStyle={StyledInput}
                         onFocus={showTimepicker}
                         value={valueDateAndTime.time}
@@ -175,7 +175,7 @@ export default function ({ propertyReference }) {
                                 size={sizeIcon}
                                 color={UIColors.violetOfficalColor}
                             />}
-                        label='Home ID'
+                        label={message['Home ID']}
                         containerStyle={StyledInput}
                         disabled={true}
                         leftIconContainerStyle={StyledIcon}
@@ -184,14 +184,14 @@ export default function ({ propertyReference }) {
             </ScrollView>
             <RootModal statusModal={showModal} setStatusModal={setShowModal}>
                 <WrapperModalText>
-                    <StyledModalText bold='bold'>Date: </StyledModalText>
+                    <StyledModalText bold='bold'>{message.Date}: </StyledModalText>
                     <StyledModalText>{valueDateAndTime.date}</StyledModalText>
                 </WrapperModalText>
                 <WrapperModalText>
-                    <StyledModalText bold='bold'>Time: </StyledModalText>
+                    <StyledModalText bold='bold'>{message.Time}: </StyledModalText>
                     <StyledModalText>{valueDateAndTime.time}</StyledModalText>
                 </WrapperModalText>
-                <StyledModalConfirm>Are you sure ?</StyledModalConfirm>
+                <StyledModalConfirm>{message['Are you sure ?']}</StyledModalConfirm>
             </RootModal>
             <Button
                 icon={
@@ -202,7 +202,7 @@ export default function ({ propertyReference }) {
                     />
                 }
                 iconRight
-                title="Book"
+                title={message.Book}
                 onPress={() => setShowModal(true)}
                 buttonStyle={{ borderRadius: 25, backgroundColor: UIColors.blue }}
                 titleStyle={{ fontSize: 20, paddingRight: 4 }}
