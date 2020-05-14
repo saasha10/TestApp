@@ -266,10 +266,10 @@ export default function ({ filters, setFiltersSelected, message }) {
             <StyledContainerButtons>
                 <StyledFooterButtons isClose={UIColors.red}
                     onPress={() => setModalVisible(!modalVisible)}>
-                    <StyledButtonText>Close</StyledButtonText>
+                    <StyledButtonText>{message.Close}</StyledButtonText>
                 </StyledFooterButtons>
                 <StyledFooterButtons>
-                    <StyledButtonText onPress={handleFiltersSelected}>Accept</StyledButtonText>
+                    <StyledButtonText onPress={handleFiltersSelected}>{message.Accept}</StyledButtonText>
                 </StyledFooterButtons>
             </StyledContainerButtons>
         </View>
