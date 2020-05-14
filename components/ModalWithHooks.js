@@ -29,14 +29,13 @@ const StyledDivider = styled.View`
 `
 //-----------------------------Styled MODAL BODY-----------------------------------
 const StyledModalBody = styled.View`
-    flex: 4;
+    flex: 1;
     background-color: ${UIColors.white};
-    paddingVertical: 20px;
-    paddingHorizontal: 10px;
+    padding: 10px;
 `
 
 const StyledBodyView2 = styled.View`
-    flex: 2;
+    flex: 1;
 `
 
 const StyledPicker = styled.Picker`
@@ -79,7 +78,7 @@ const StyledButtonText = styled.Text`
 const StyledModalContainer = styled.View`
     width:${screenWidth}px;
     height:${screenHeight}px;
-    background-color: ${UIColors.grayAlmostWhite};
+    background-color: ${UIColors.white};
     borderRadius: 5px;
     padding: 10px;
 `
@@ -101,10 +100,6 @@ createPickerItem = (filtersType, message) => filtersType.map((element, key) => {
 })
 //---------------------------------------- MAIN -----------------------------------------------
 export default function ({ filters, setFiltersSelected, message }) {
-    // console.log("MODAL WITH HOOKS PROPS")
-    // console.log({ filters })
-    // console.log("setFiltersSelected", setFiltersSelected)
-
     const [modalVisible, setModalVisible] = useState(false)
     const [homeType, setHomeType] = useState('')
     const [offer, setOffer] = useState('')

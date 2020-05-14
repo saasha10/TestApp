@@ -7,8 +7,8 @@ import { connectLocale } from './HOCC/connectLocale'
 const StyledText = styled.Text`  
     margin: 5px;
     padding: 10px;
-    height: 50px;
-    font-size: 24px;
+    height: 45px;
+    font-size: 20px;
     font-style: italic;
     text-align: center;
     color: ${UIColors.greyStrong2};
@@ -21,8 +21,8 @@ function TextSearch ({ openModal, message }) {
     return (
         <>
             <StyledText onPress={openModal}>
+                {/* <Icon name="search" size={20} style={{ color: UIColors.greyStrong1, marginRight: 5}} /> */}
                 {message['Search here...']}
-                <Icon name="search" size={20} style={{ color: UIColors.greyStrong1}} />
             </StyledText>
         </>
     )

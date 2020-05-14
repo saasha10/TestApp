@@ -10,6 +10,7 @@ export const StyledViewContainer = styled.View`
     flex: 1;
     justify-content: space-around;
     margin: 4px;
+    padding-bottom: 30px;
 `
 
 const StyledTextNoResult = styled(Text)`
