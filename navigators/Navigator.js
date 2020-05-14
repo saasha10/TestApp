@@ -14,7 +14,7 @@ import SignIn from '../login/SignIn'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { UIColors } from '../constants/colors'
 import MainProperty from '../containers/MainProperty'
-import BookVisitContainer from '../containers/BookVisitContainer'
+import BookVisit from '../containers/BookVisit'
 
 
 export const navigationRef = React.createRef()
@@ -32,7 +32,7 @@ const AppNavigator = () =>
         <Stack.Navigator headerMode="none">
             <Stack.Screen name={MENU} component={DrawerNavigatior} />
             <Stack.Screen name={MAIN_PROPERTY} component={MainProperty}/>
-            <Stack.Screen name={BOOK_VISIT} component={BookVisitContainer}/>
+            <Stack.Screen name={BOOK_VISIT} component={BookVisit}/>
         </Stack.Navigator>
     </NavigationContainer>
 
