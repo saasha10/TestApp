@@ -10,6 +10,7 @@ import Main from '../../utilitiesJS/Main'
 import { screenWidth, screenHeight } from '../ModalWithHooks'
 import PanelCollapsible from './PanelCollapsible'
 import get from 'lodash/get'
+import filter from 'lodash/filter'
 import MapView, { PROVIDER_GOOGLE, Circle } from 'react-native-maps'
 
 const { BOOK_VISIT } = STACK_NAMES
@@ -97,7 +98,7 @@ formatData = (dataList, numColumns) => {
     return dataList
 }
 
-function Feature({ feature }) {
+function Feature({ feature, message }) {
     const key = Object.keys(feature)
     const value = Object.values(feature)
     const showValue = typeof value[0] !== "boolean"
@@ -111,13 +112,13 @@ function Feature({ feature }) {
             <FontAwesome5Icon name={main.parserNameToIcon(key[0])}
                 size={20}
             />
-            <FeatureName>{main.parserFeatureName(key[0])}</FeatureName>
+            <FeatureName>{message[main.parserFeatureName(key[0])]}</FeatureName>
             <View>{showValue && <Badge value={value[0]} status="primary" />}</View>
         </StyledDetailsWrapper>
     )
 }
 
-export default function MainProperty({ property, navigate }) {
+export default function MainProperty({ property, navigate, locale, message }) {
     const address = get(property, 'propertyAddress')
     const latLng = {
         latitude: get(address, 'addressCoordinatesLatitude'),
@@ -128,6 +129,8 @@ export default function MainProperty({ property, navigate }) {
     const contact = get(property, 'propertyContact')
     const phoneNumber = get(contact, 'contactPrimaryPhoneNumber')
     const descriptions = get(property, 'propertyDescriptions')
+    const language = main.parserLocaleToLanguage(locale.substring(0, 2))
+    const descriptionValue = filter(descriptions, ['descriptionLanguage', language])
     const featuresObj = get(property, 'propertyFeatures')
     const featuresArray = createFeaturesArray(featuresObj)
     const featuresType = get(featuresObj, 'featuresType')
@@ -145,7 +148,7 @@ export default function MainProperty({ property, navigate }) {
                     imageStyle={{ height: 300 }}
                     containerStyle={{ margin: 0 }}
                 >
-                    <TypeHouse h3>{featuresType}</TypeHouse>
+                    <TypeHouse h3>{message[featuresType]}</TypeHouse>
                     <PriceAndTown>
                         <TextPriceAndTown>{price} €</TextPriceAndTown>
                         <TextPriceAndTown>{city}</TextPriceAndTown>
@@ -155,11 +158,11 @@ export default function MainProperty({ property, navigate }) {
                 <FlatList
                     data={formatData(featuresArray, numColumns)}
                     style={{ flex: 1 }}
-                    renderItem={({ item }) => <Feature feature={item} />}
+                    renderItem={({ item }) => <Feature feature={item} message={message}/>}
                     numColumns={numColumns}
                     keyExtractor={(value, index) => index.toString()} />
-                <PanelCollapsible title="Description">
-                    <Text>{descriptions[0].descriptionText}</Text>
+                <PanelCollapsible title={message.Description}>
+                    <Text>{descriptionValue[0].descriptionText}</Text>
                 </PanelCollapsible>
                 <StyledMapWrapper>
                     <StyledMapView
@@ -195,7 +198,7 @@ export default function MainProperty({ property, navigate }) {
                     />
                 }
                 iconRight
-                title="Visit"
+                title={message.Visit}
                 onPress={() => navigate(BOOK_VISIT)}
                 buttonStyle={{ borderRadius: 25, backgroundColor: UIColors.blue }}
                 titleStyle={{ fontSize: 18, paddingRight: 4 }}
