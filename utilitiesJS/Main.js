@@ -1,21 +1,21 @@
 import { FEATURES } from '../constants/features'
-const { 
-    BATHROOM, 
-    BEDROOM, 
-    HEATING, 
-    CONDITIONED_AIR, 
-    ORIENTATION, 
-    PARKING, 
-    POOL, 
-    TERRACE, 
-    GARDEN, 
-    WARDROBES, 
-    STORAGE, 
-    EQUIPPED, 
-    EQUIPPED_KITCHEN, 
-    LIFT, 
-    PENT_HOUSE, 
-    DOORMAN 
+const {
+    BATHROOM,
+    BEDROOM,
+    HEATING,
+    CONDITIONED_AIR,
+    ORIENTATION,
+    PARKING,
+    POOL,
+    TERRACE,
+    GARDEN,
+    WARDROBES,
+    STORAGE,
+    EQUIPPED,
+    EQUIPPED_KITCHEN,
+    LIFT,
+    PENT_HOUSE,
+    DOORMAN
 } = FEATURES
 export default class Main {
     constructor() {
@@ -121,6 +121,23 @@ export default class Main {
             default:
                 //console.log("NOT FOUND ICON", key)
                 return 'angry'
+        }
+    }
+    //--------------------------------------------------------------------------
+    parserLocaleToLanguage = key => {
+        switch (key) {
+            case 'es':
+                return 'spanish'
+            case 'en':
+                return 'english'
+            case 'it':
+                return 'italian'
+            case 'fr':
+                return 'french'
+            case 'de':
+                return 'german'
+            default:
+                return 'spanish'
         }
     }
 }
