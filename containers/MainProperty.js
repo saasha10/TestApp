@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import { navigate } from '../actions/navigation'
+import { connectLocale } from '../components/HOCC/connectLocale'
 import MainProperty from '../components/utilities/MainProperty'
 import { getPropertySelected } from '../selectors/propertySelected'
 
@@ -11,4 +13,6 @@ const mapDispatchToProps = dispatch => ({
     navigate: state => dispatch(navigate(state))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainProperty)
+export default compose(
+    connectLocale,
+    connect(mapStateToProps, mapDispatchToProps))(MainProperty)
