@@ -1,24 +1,25 @@
 import React from 'react'
+import { connectLocale } from '../HOCC/connectLocale'
 import { Modal, View, StyleSheet } from 'react-native'
 import { Button } from 'react-native-elements'
 
-export default RootModal = ({ statusModal, setStatusModal, children }) => (
-        <Modal visible={statusModal} animationType="slide" transparent testID="modal">
-            <View style={styles.centeredView}>
-                <View style={styles.modalView}>
-                    {children}
-                    <View
-                        style={{
-                            marginTop: 10,
-                            flexDirection: "row",
-                            justifyContent: 'space-between',
-                        }}>
-                        <Button onPress={() => setStatusModal(!statusModal)} title="Close" buttonStyle={{ backgroundColor: 'red', paddingVertical: 5, paddingHorizontal: 10, borderRadius: 10 }} />
-                        <Button onPress={() => { }} title="Accept" buttonStyle={{ backgroundColor: 'green', paddingVertical: 5, paddingHorizontal: 10, borderRadius: 10 }} />
-                    </View>
+const RootModal = ({ statusModal, setStatusModal, children, message }) => (
+    <Modal visible={statusModal} animationType="slide" transparent testID="modal">
+        <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+                {children}
+                <View
+                    style={{
+                        marginTop: 10,
+                        flexDirection: "row",
+                        justifyContent: 'space-between',
+                    }}>
+                    <Button onPress={() => setStatusModal(!statusModal)} title={message.Close} buttonStyle={{ backgroundColor: 'red', paddingVertical: 5, paddingHorizontal: 10, borderRadius: 10 }} />
+                    <Button onPress={() => { }} title={message.Accept} buttonStyle={{ backgroundColor: 'green', paddingVertical: 5, paddingHorizontal: 10, borderRadius: 10 }} />
                 </View>
             </View>
-        </Modal>
+        </View>
+    </Modal>
 )
 
 const styles = StyleSheet.create({
@@ -42,3 +43,5 @@ const styles = StyleSheet.create({
         elevation: 5
     }
 })
+
+export default connectLocale(RootModal)
