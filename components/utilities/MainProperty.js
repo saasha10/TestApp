@@ -3,15 +3,15 @@ import { Platform, Linking, FlatList, View } from 'react-native'
 import { Card, Text, Badge, Divider, Button } from 'react-native-elements'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
-import styled from 'styled-components'
+import styled from 'styled-components/native'
+import get from 'lodash/get'
+import filter from 'lodash/filter'
+import MapView, { PROVIDER_GOOGLE, Circle } from 'react-native-maps'
 import { STACK_NAMES } from '../../constants/navigation'
 import { UIColors } from '../../constants/colors'
 import Main from '../../utilitiesJS/Main'
 import { screenWidth, screenHeight } from '../ModalWithHooks'
 import PanelCollapsible from './PanelCollapsible'
-import get from 'lodash/get'
-import filter from 'lodash/filter'
-import MapView, { PROVIDER_GOOGLE, Circle } from 'react-native-maps'
 
 const { BOOK_VISIT } = STACK_NAMES
 
@@ -46,6 +46,8 @@ const StyledDetailsWrapper = styled.View`
     align-items: center;
     align-content: flex-start;
     flex: 1;
+    border-bottom-width: 1px;
+    borderColor: ${UIColors.lightGray};
 `
 
 const FeatureName = styled.Text`
@@ -162,7 +164,7 @@ export default function MainProperty({ property, navigate, locale, message }) {
                     numColumns={numColumns}
                     keyExtractor={(value, index) => index.toString()} />
                 <PanelCollapsible title={message.Description}>
-                    <Text>{descriptionValue[0].descriptionText}</Text>
+                    <Text>{descriptionValue.length > 0 ? descriptionValue[0].descriptionText : descriptions[0].descriptionText}</Text>
                 </PanelCollapsible>
                 <StyledMapWrapper>
                     <StyledMapView
