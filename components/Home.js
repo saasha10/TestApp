@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import ModalWithHooksContainer from '../containers/ModalWithHooksContainer'
 import DataContainer from '../containers/DataContainer'
 import { UIColors } from '../constants/colors'

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { Text, Input } from 'react-native-elements'
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import { UIColors } from '../constants/colors'
 
 const StyledViewSignIn = styled.View`

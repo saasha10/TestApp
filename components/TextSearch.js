@@ -1,6 +1,6 @@
 import React from 'react'
-import Icon from 'react-native-vector-icons/FontAwesome5'
-import styled from 'styled-components'
+// import Icon from 'react-native-vector-icons/FontAwesome5'
+import styled from 'styled-components/native'
 import { UIColors } from '../constants/colors'
 import { connectLocale } from './HOCC/connectLocale'
 

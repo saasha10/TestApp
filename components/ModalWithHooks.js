@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import { View, Dimensions, Picker, ScrollView } from 'react-native'
 import { Text, Input } from 'react-native-elements'
 import MultiSlider from '@ptomasroos/react-native-multi-slider'

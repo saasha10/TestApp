@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, Platform } from 'react-native'
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 import { Input, Button } from 'react-native-elements'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'

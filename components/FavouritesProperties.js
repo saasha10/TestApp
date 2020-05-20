@@ -4,7 +4,7 @@ import { Text } from 'react-native-elements'
 import { StyledViewContainer } from './dataList'
 import CardProperty from '../containers/CardProperty'
 import { UIColors } from '../constants/colors'
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 
 export const WrapperTitle = styled.View`
     align-items: center;
