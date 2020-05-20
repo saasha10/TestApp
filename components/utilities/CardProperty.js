@@ -75,6 +75,7 @@ export default ({ property, favouriteProperties, addFavouriteProperty, removeFav
         <Card
             image={{ uri: property.propertyImages[0].imageUrl }}
             imageStyle={{ width: 100, height: 220 }}
+            imageProps={{resizeMode: "cover", resizeMethod: "resize"}}
         >
             {/* <StyledImage source={{ uri: property.propertyImages[0].imageUrl }} /> */}
             <WrapperElements>
