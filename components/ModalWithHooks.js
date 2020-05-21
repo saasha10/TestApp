@@ -99,7 +99,7 @@ createPickerItem = (filtersType, message) => filtersType.map((element, key) => {
     return <Picker.Item label={labelValue} value={element} key={key} />
 })
 //---------------------------------------- MAIN -----------------------------------------------
-export default function ({ filters, setFiltersSelected, message }) {
+export default function ({ filters, loading, setFiltersSelected, message }) {
     const [modalVisible, setModalVisible] = useState(false)
     const [homeType, setHomeType] = useState('')
     const [offer, setOffer] = useState('')
@@ -307,12 +307,13 @@ export default function ({ filters, setFiltersSelected, message }) {
     )
     //----------------------------------------------------------------
     return (
-        <>
-            <TextInput openModal={() => setModalVisible(true)} />
-            <StyledParentModal>
-                {modal}
-            </StyledParentModal>
-        </>
+        loading ? null :
+            <>
+                <TextInput openModal={() => setModalVisible(true)} />
+                <StyledParentModal>
+                    {modal}
+                </StyledParentModal>
+            </>
     )
 
 }
