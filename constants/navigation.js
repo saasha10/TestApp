@@ -17,5 +17,6 @@ export const TAB_NAMES = {
     SIGN_IN: "Signin",
     SIGN_UP: "Signup",
     HOME: "Home",
-    FAVOURITE_PROPERTIES: "FavouriteProperties"
+    FAVOURITE_PROPERTIES: "FavouriteProperties",
+    VISITS: "Visits"
 }
