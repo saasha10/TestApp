@@ -10,6 +10,7 @@ export const UIColors = {
     green: "#21ba45",
     blue: "#2089dc",
     darkBlue: "#055694",
+    strongBlue: "#0072d8",
     lightBlue: "#469EE1",
     lighterBlue: "70B4E8"
 }
