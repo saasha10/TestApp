@@ -61,15 +61,13 @@ const StyledButtonShow = styled.Button`
 
 const { MAIN_PROPERTY } = STACK_NAMES
 
-export default ({ property, favouriteProperties, addFavouriteProperty, removeFavouriteProperty, propertySelected, navigate, message }) => {
+export default ({ property, isFavouriteProperty, addFavouriteProperty, removeFavouriteProperty, propertySelected, navigate, message }) => {
     const operationType = get(property, 'propertyOperation.operationType')
     const featuresType = get(property, 'propertyFeatures.featuresType')
     const operationPrice = get(property, 'propertyOperation.operationPrice').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
     const addressTown = get(property, 'propertyAddress.addressTown')
-    const isPropertyFavourite = includes(favouriteProperties, property)
-    const iconName = isPropertyFavourite ? "heart" : "heart-o"
-    const iconColor = isPropertyFavourite ? UIColors.red : UIColors.black
-
+    const iconName = isFavouriteProperty ? "heart" : "heart-o"
+    const iconColor = isFavouriteProperty ? UIColors.red : UIColors.black
 
     return (
         <Card
@@ -94,7 +92,7 @@ export default ({ property, favouriteProperties, addFavouriteProperty, removeFav
                             name={iconName}
                             size={25}
                             color={iconColor}
-                            onPress={() => isPropertyFavourite ? removeFavouriteProperty(property) : addFavouriteProperty(property)}
+                            onPress={() => isFavouriteProperty ? removeFavouriteProperty(property) : addFavouriteProperty(property)}
                         />
                     </WrapperIcon>
                 </View>
