@@ -19,8 +19,8 @@ export const setFilters = filters => {
     }
 }
 
-export const setFiltersSelected = filtersSelected => {
-    const state = store.getState()
+export const setFiltersSelected = filtersSelected => (dispatch, getState) => {
+    const state = getState()
 
     let propertiesFiltered = getCustomerProperties(state)
 
@@ -46,9 +46,11 @@ export const setFiltersSelected = filtersSelected => {
             return propertiesFiltered
         })
     })
-    store.dispatch(setProperties(propertiesFiltered))
-    return {
+
+    dispatch(setProperties(propertiesFiltered))
+
+    return dispatch({
         type: SET_FILTERS_SELECTED,
         payload: filtersSelected
-    }
+    })
 }
