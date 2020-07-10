@@ -4,18 +4,18 @@ import { addFavouriteProperty, removeFavouriteProperty, propertySelected } from 
 import { navigate } from '../actions/navigation'
 import { connectLocale } from '../components/HOCC/connectLocale'
 import CardProperty from '../components/utilities/CardProperty'
-import { getFavouriteProperties } from '../selectors/favouriteProperties'
+import { isFavouriteProperty } from '../selectors/favouriteProperties'
 
-const mapStateToProps = state => ({
-    favouriteProperties: getFavouriteProperties(state)
+const mapStateToProps = (state, ownProps) => ({
+    isFavouriteProperty: isFavouriteProperty(state, ownProps.property)
 })
 
-const mapDispatchToProps = dispatch => ({
-    addFavouriteProperty: state => dispatch(addFavouriteProperty(state)),
-    removeFavouriteProperty: state => dispatch(removeFavouriteProperty(state)),
-    propertySelected: state => dispatch(propertySelected(state)),
-    navigate: state => dispatch(navigate(state))
-})
+const mapDispatchToProps = {
+    addFavouriteProperty,
+    removeFavouriteProperty,
+    propertySelected,
+    navigate
+}
 
 export default compose(
     connectLocale,
