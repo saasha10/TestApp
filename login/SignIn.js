@@ -37,6 +37,7 @@ function SignIn({ message }) {
                     <FontAwesome5Icon
                         name='user-alt'
                         size={24}
+                        color={UIColors.greyStrong2}
                     />}
                 containerStyle={StyledInput}
                 leftIconContainerStyle={StyledIcon}
@@ -56,6 +57,7 @@ function SignIn({ message }) {
                     <FontAwesome5Icon
                         name='lock'
                         size={sizeIcon}
+                        color={UIColors.greyStrong2}
                     />}
                 containerStyle={StyledInput}
                 leftIconContainerStyle={StyledIcon}
