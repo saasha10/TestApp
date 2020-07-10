@@ -7,7 +7,7 @@ const MyLoaderListCard = () => (
     <Card>
         <ContentLoader
             speed={1}
-            width={400}
+            width={350}
             height={200}
             viewBox="0 0 400 200"
             backgroundColor={UIColors.lightGray}
