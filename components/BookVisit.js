@@ -18,11 +18,11 @@ const WrapperInputs = styled.View`
     flex: 1;
 `
 
-const StyledInput = {
+export const StyledInput = {
     margin: 10
 }
 
-const StyledIcon = {
+export const StyledIcon = {
     marginRight: 10
 }
 
@@ -42,7 +42,7 @@ const StyledModalConfirm = styled.Text`
     margin: 10px;
 `
 
-const sizeIcon = 24
+export const sizeIcon = 24
 
 const formatValue = date => {
 
